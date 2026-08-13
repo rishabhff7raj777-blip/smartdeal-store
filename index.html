@@ -5,22 +5,28 @@
 <div id="detail" class="detail"><button class="back" onclick="closeD()">← Back</button><img id="mi" class="mainimg"><div id="thumbs" class="thumbs"></div><div class="body"><h1 id="dn"></h1><div id="dp" class="price"></div><p id="dd" style="white-space:pre-line"></p><h3>Key Features</h3><p id="df"></p><h3>Delivery Information</h3><p id="dv"></p><button class="buy" onclick="orderForm()">BUY NOW</button></div></div>
 <div id="form" class="form"><button class="back" onclick="closeF()">← Back</button><h2>Delivery Details</h2><p id="op"></p><input id="cn" placeholder="Customer Name *"><input id="ph" placeholder="Mobile Number *"><input id="house" placeholder="House / Building *"><input id="area" placeholder="Road / Area / Colony *"><input id="pin" placeholder="Pincode *"><input id="city" placeholder="City *"><input id="state" placeholder="State *"><p><b>Payment: Cash on Delivery</b></p><button class="buy" onclick="place()">PLACE ORDER ON WHATSAPP</button></div>
 <script>
-let ps = [
+let ps=[
   {
-    id: 1,
-    n: "Smart glowing panda",
-    p: "300",
-    m: "500",
-    d: "🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap. 🌈💡\n\n🔋 Rechargeable\n🧸 Soft & Cute Design\n🌈 Tap to Change Colours\n🏠 Perfect for Kids Room & Bedroom\n🎁 Great for Gifting\n🔥 ₹500 OFF — Now Only ₹300!\n📩 Order करने के लिए हमें DM करें.",
-    f: "Soft metarial, Rechargeable",
-    delv: "COD Available. Delivery 12 - 13 Days returnable",
-    im: [
-      "1c608293556e329bf625c251cd1cb59f.jpg",
-      "dff23ef47eb99b2093fc1c0a287672fc.jpg",
-      "2a7d33d38d8468013740b8102c82da79.jpg"
-    ]
+    id:1,
+    n:"Smart glowing panda",
+    p:"300",
+    m:"500",
+    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap. 🌈💡\n\n🔋 Rechargeable\n🧸 Soft & Cute Design\n🌈 Tap to Change Colours\n🏠 Perfect for Kids Room & Bedroom\n🎁 Great for Gifting\n🔥 ₹500 OFF — Now Only ₹300!\n📩 Order करने के लिए हमें DM करें.",
+    f:"Soft metarial, Rechargeable",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
+  },
+  {
+    id:2,
+    n:"Premanand ji maharaj wall hanging",
+    p:"130",
+    m:"200",
+    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging. ✨\n\nPremium Quality\n🏡 Perfect for Home Temple, Living Room & Gifting\n🚚 Cash on Delivery Available\n💥 Market Price: ₹200\n🔥 Today Only: ₹130",
+    f:"Wall Hanging Wooden",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    im:["dff23ef47eb99b2093fc1c0a287672fc.jpg"]
   }
-], cur = null;
+],cur=null;
 
 function render(){let q=$('q').value.toLowerCase(),a=ps.filter(x=>(x.n+' '+(x.d||'')).toLowerCase().includes(q));$('grid').innerHTML=a.length?a.map(x=>`<div class="card" onclick="openD(${x.id})"><img src="${x.im[0]}"><div class="info"><b>${x.n}</b><div class="price">₹${x.p} ${x.m?`<span class="old">₹${x.m}</span>`:''}</div></div></div>`).join(''):'<div class="empty">No products found</div>'}
 function openD(id){cur=ps.find(x=>x.id===id);$('detail').style.display='block';$('dn').textContent=cur.n;$('dp').textContent='₹'+cur.p;$('dd').textContent=cur.d||'';$('df').textContent=cur.f||'';$('dv').textContent=cur.delv||'';$('mi').src=cur.im[0];$('thumbs').innerHTML=cur.im.map(x=>`<img src="${x}" onclick="$('mi').src='${x}'">`).join('')}
