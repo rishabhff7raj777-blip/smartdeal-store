@@ -1,9 +1,9 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SmartDeal Store</title>
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;pb:70px}
+body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70px}
 .top{position:sticky;top:0;background:#fff;padding:12px 15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);z-index:3;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .brand{font-size:22px;font-weight:900}.brand span{color:#d81b60}
-.cart-icon-btn{background:#d81b60;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;position:relative;display:flex;align-items:center;gap:6px}
+.cart-icon-btn{background:#d81b60;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;gap:6px}
 .cart-badge{background:#fff;color:#d81b60;border-radius:50%;padding:2px 7px;font-size:12px}
 .search{width:100%;box-sizing:border-box;padding:10px 12px;margin-top:10px;border:1px solid #ddd;border-radius:10px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:#ddd}
@@ -16,7 +16,7 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;pb:70px}
 .btn-add{flex:1;padding:8px;background:#f8bbd0;color:#880e4f;border:0;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px}
 .btn-buy{flex:1;padding:8px;background:#d81b60;color:#fff;border:0;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px}
 
-/* Detail & Cart Modal */
+/* Detail & Modal */
 .modal{display:none;position:fixed;inset:0;background:#fff;z-index:100;overflow:auto}
 .back{padding:12px 15px;border:0;background:#eee;font-size:16px;font-weight:bold;margin:10px;border-radius:8px;cursor:pointer}
 .mainimg{width:100%;height:320px;object-fit:contain}
@@ -25,10 +25,18 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;pb:70px}
 .body{padding:15px}
 .buy-btn-full{width:100%;padding:14px;background:#d81b60;color:#fff;border:0;border-radius:9px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px}
 
-/* Support Floating Button */
+/* Size Options UI */
+.size-box{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 15px}
+.size-btn{border:1px solid #ccc;background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:center;font-size:13px;min-width:50px}
+.size-btn b{display:block;font-size:14px}
+.size-btn span{font-size:11px;color:#666}
+.size-btn.active{border:2px solid #d81b60;background:#fce4ec;color:#d81b60;font-weight:bold}
+.size-btn.active span{color:#d81b60}
+
+/* Support Float Button */
 .support-float{position:fixed;bottom:20px;left:20px;background:#25d366;color:#fff;width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:90;cursor:pointer;font-size:24px;border:none}
 
-/* Form & Cart List */
+/* Forms & Cart */
 .form{display:none;position:fixed;inset:0;background:#f6f6f8;z-index:110;padding:15px;overflow:auto}
 .form input{width:100%;box-sizing:border-box;padding:12px;margin:6px 0 12px;border:1px solid #ccc;border-radius:9px}
 .empty{text-align:center;padding:60px;color:#777}
@@ -53,13 +61,20 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;pb:70px}
   <div class="body">
     <h1 id="dn" style="font-size:20px;margin:5px 0"></h1>
     <div id="dp" class="price" style="color:#d81b60"></div>
+    
+    <!-- Size Selector -->
+    <div id="size-container" style="display:none;margin-top:15px">
+      <h3 style="margin:0 0 5px">Select Size:</h3>
+      <div id="size-options" class="size-box"></div>
+    </div>
+
     <p id="dd" style="white-space:pre-line;color:#444"></p>
     <h3>Key Features</h3>
     <p id="df" style="white-space:pre-line;color:#555"></p>
     <h3>Delivery Information</h3>
     <p id="dv" style="white-space:pre-line;color:#555"></p>
     <div style="display:flex;gap:10px">
-      <button class="buy-btn-full" style="background:#f8bbd0;color:#880e4f" onclick="addToCart(cur.id)">ADD TO CART</button>
+      <button class="buy-btn-full" style="background:#f8bbd0;color:#880e4f" onclick="addToCartCurrent()">ADD TO CART</button>
       <button class="buy-btn-full" onclick="orderSingleForm()">BUY NOW</button>
     </div>
   </div>
@@ -100,30 +115,15 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;pb:70px}
   <button class="back" onclick="closeSupport()">← Back</button>
   <div class="body">
     <h2 style="margin-top:0">Customer Support & Help 🎧</h2>
-    
     <div class="support-card">
       <h3 style="margin:0 0 5px;color:#2e7d32">💡 Product Na Mile?</h3>
       <p style="margin:0;font-size:14px;color:#1b5e20">Agar aapko hamaare store par koi product nahi mil raha hai, toh hume WhatsApp par batayein! Hum us product ko aapke liye store par zaroor add karenge.</p>
     </div>
-
     <div class="support-box">
       <h4 style="margin:0 0 5px">📦 Order Receive Nahi Hua?</h4>
-      <p style="margin:0;font-size:13px;color:#666">Agar aapka order time par nahi mila ya delay ho raha hai, toh hume message karein. Hum <b>24 ghante ke andar</b> reply karke aapko update denge.</p>
+      <p style="margin:0;font-size:13px;color:#666">Agar aapka order time par nahi mila ya delay ho raha hai, toh hume message karein. Hum <b>24 ghante ke andar</b> reply karenge.</p>
     </div>
-
-    <div class="support-box">
-      <h4 style="margin:0 0 5px">🔄 Returns & Refund Policy</h4>
-      <p style="margin:0;font-size:13px;color:#666">Damaged ya galat item milne par 7 dino ke andar replacement ki suvidha available hai.</p>
-    </div>
-
-    <div class="support-box">
-      <h4 style="margin:0 0 5px">💬 Fast Response Time</h4>
-      <p style="margin:0;font-size:13px;color:#666">Hamaari team Monday - Sunday (9 AM - 9 PM) aapki madad ke liye active hai.</p>
-    </div>
-
-    <button class="buy-btn-full" style="background:#25d366" onclick="contactSupportWhatsApp()">
-      💬 Contact Us on WhatsApp
-    </button>
+    <button class="buy-btn-full" style="background:#25d366" onclick="contactSupportWhatsApp()">💬 Contact Us on WhatsApp</button>
   </div>
 </div>
 
@@ -134,7 +134,7 @@ let ps=[
     n:"Smart glowing panda",
     p:300,
     m:500,
-    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap. 🌈💡\n\n🔋 Rechargeable\n🧸 Soft & Cute Design\n🌈 Tap to Change Colours\n🏠 Perfect for Kids Room & Bedroom\n🎁 Great for Gifting\n🔥 ₹500 OFF — Now Only ₹300!",
+    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.",
     f:"Soft material, Rechargeable",
     delv:"COD Available. Delivery 12 - 13 Days returnable",
     im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
@@ -144,7 +144,7 @@ let ps=[
     n:"Premanand ji maharaj wall hanging",
     p:130,
     m:200,
-    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging. ✨\n\nPremium Quality\n🏡 Perfect for Home Temple, Living Room & Gifting",
+    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.",
     f:"Wall Hanging Wooden",
     delv:"COD Available. Delivery 12 - 13 Days returnable",
     im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]
@@ -154,9 +154,9 @@ let ps=[
     n:"Mahadev Rudraksha Trishul Necklace",
     p:150,
     m:300,
-    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace. Stylish look ke saath spiritual design, daily wear aur gifting ke liye suitable.",
-    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads\n✨ Attractive traditional look\n👕 Daily wear & festive occasions ke liye suitable",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery (COD) available\n🚚 Estimated delivery: 5–10 working days",
+    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
+    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
     im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg","ms_qjfjr_512_554147024.jpg"]
   },
   {
@@ -164,16 +164,38 @@ let ps=[
     n:"Anime Character Keychain – Cute Collectible Keyring",
     p:450,
     m:799,
-    d:"Anime lovers ke liye stylish character keychain. Bag, school bag, backpack ya keys ke saath easily use kar sakte ho. Different character designs available hain.",
-    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach\n🎒 Bag, backpack & keys ke liye suitable",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    d:"Anime lovers ke liye stylish character keychain.",
+    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
     im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg","ms_ryo3l_512_872176439.jpg"]
+  },
+  {
+    id:5,
+    n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
+    p:385,
+    m:799,
+    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set. Isme stylish V-neck Angrakha pattern, side dori tassels, aur matching printed dupatta milta hai.",
+    f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
+    sizes:[
+      {s:"S", p:385},
+      {s:"M", p:458},
+      {s:"L", p:527},
+      {s:"XL", p:533},
+      {s:"XXL", p:532},
+      {s:"XXXL", p:533},
+      {s:"4XL", p:535},
+      {s:"5XL", p:535}
+    ]
   }
 ];
 
 let cart = JSON.parse(localStorage.getItem('sm_cart') || '[]');
 let cur = null;
-let orderMode = 'single'; // 'single' or 'cart'
+let selectedSize = null;
+let selectedPrice = null;
+let orderMode = 'single';
 
 function updateCartCount(){
   let total = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -190,52 +212,78 @@ function render(){
         <img src="${x.im[0]}">
         <div class="info">
           <b>${x.n}</b>
-          <div class="price">₹${x.p} ${x.m?`<span class="old">₹${x.m}</span>`:''}</div>
+          <div class="price">₹${x.p} ${x.sizes?'onwards':''} ${x.m?`<span class="old">₹${x.m}</span>`:''}</div>
         </div>
       </div>
       <div class="card-btns">
-        <button class="btn-add" onclick="addToCart(${x.id})">+ Cart</button>
-        <button class="btn-buy" onclick="buyNowDirect(${x.id})">Buy</button>
+        <button class="btn-add" onclick="openD(${x.id})">+ Cart</button>
+        <button class="btn-buy" onclick="openD(${x.id})">Buy</button>
       </div>
     </div>
   `).join(''):'<div class="empty">No products found</div>';
   updateCartCount();
 }
 
-function addToCart(id){
-  let item = cart.find(x => x.id === id);
-  if(item){ item.qty++; }
-  else { cart.push({id: id, qty: 1}); }
-  updateCartCount();
-  alert('Item added to Cart!');
-}
-
-function buyNowDirect(id){
-  cur = ps.find(x => x.id === id);
-  orderMode = 'single';
-  openForm();
-}
-
 function openD(id){
   cur=ps.find(x=>x.id===id);
   $('detail').style.display='block';
   $('dn').textContent=cur.n;
-  $('dp').textContent='₹'+cur.p;
   $('dd').textContent=cur.d||'';
   $('df').textContent=cur.f||'';
   $('dv').textContent=cur.delv||'';
   $('mi').src=cur.im[0];
   $('thumbs').innerHTML=cur.im.map(x=>`<img src="${x}" onclick="$('mi').src='${x}'">`).join('');
+
+  if(cur.sizes && cur.sizes.length){
+    $('size-container').style.display='block';
+    selectedSize = cur.sizes[0].s;
+    selectedPrice = cur.sizes[0].p;
+    renderSizes();
+  } else {
+    $('size-container').style.display='none';
+    selectedSize = null;
+    selectedPrice = cur.p;
+    $('dp').textContent='₹'+cur.p;
+  }
+}
+
+function renderSizes(){
+  $('dp').textContent='₹'+selectedPrice;
+  $('size-options').innerHTML = cur.sizes.map(sz => `
+    <div class="size-btn ${selectedSize === sz.s ? 'active' : ''}" onclick="selectSize('${sz.s}', ${sz.p})">
+      <b>${sz.s}</b>
+      <span>₹${sz.p}</span>
+    </div>
+  `).join('');
+}
+
+function selectSize(sizeName, sizePrice){
+  selectedSize = sizeName;
+  selectedPrice = sizePrice;
+  renderSizes();
+}
+
+function addToCartCurrent(){
+  let cartId = cur.id + (selectedSize ? '-' + selectedSize : '');
+  let item = cart.find(x => x.cartId === cartId);
+  if(item){ item.qty++; }
+  else { 
+    cart.push({
+      cartId: cartId,
+      id: cur.id,
+      name: cur.n + (selectedSize ? ` (Size: ${selectedSize})` : ''),
+      price: selectedPrice,
+      qty: 1
+    }); 
+  }
+  updateCartCount();
+  alert('Item added to Cart!');
 }
 
 function closeD(){$('detail').style.display='none'}
 
-/* Cart Functions */
-function openCart(){
-  $('cartModal').style.display = 'block';
-  renderCart();
-}
-function closeCart(){$('cartModal').style.display = 'none'}
+function openCart(){ $('cartModal').style.display = 'block'; renderCart(); }
+function closeCart(){ $('cartModal').style.display = 'none'; }
 
 function renderCart(){
   if(cart.length === 0){
@@ -244,23 +292,21 @@ function renderCart(){
     $('cart-checkout-btn').style.display = 'none';
     return;
   }
-  
   let total = 0;
   let html = cart.map(item => {
-    let p = ps.find(x => x.id === item.id);
-    let itemTotal = p.p * item.qty;
+    let itemTotal = item.price * item.qty;
     total += itemTotal;
     return `
       <div class="cart-item">
         <div>
-          <b>${p.n}</b><br>
-          <span style="color:#666">₹${p.p} x ${item.qty} = ₹${itemTotal}</span>
+          <b>${item.name}</b><br>
+          <span style="color:#666">₹${item.price} x ${item.qty} = ₹${itemTotal}</span>
         </div>
         <div>
-          <button onclick="changeQty(${p.id}, -1)">-</button>
+          <button onclick="changeQty('${item.cartId}', -1)">-</button>
           <span style="margin:0 5px">${item.qty}</span>
-          <button onclick="changeQty(${p.id}, 1)">+</button>
-          <button onclick="removeFromCart(${p.id})" style="color:red;margin-left:8px;border:none;background:none;cursor:pointer">🗑️</button>
+          <button onclick="changeQty('${item.cartId}', 1)">+</button>
+          <button onclick="removeFromCart('${item.cartId}')" style="color:red;margin-left:8px;border:none;background:none;cursor:pointer">🗑️</button>
         </div>
       </div>
     `;
@@ -271,18 +317,18 @@ function renderCart(){
   $('cart-checkout-btn').style.display = 'block';
 }
 
-function changeQty(id, delta){
-  let item = cart.find(x => x.id === id);
+function changeQty(cartId, delta){
+  let item = cart.find(x => x.cartId === cartId);
   if(item){
     item.qty += delta;
-    if(item.qty <= 0){ removeFromCart(id); return; }
+    if(item.qty <= 0){ removeFromCart(cartId); return; }
   }
   updateCartCount();
   renderCart();
 }
 
-function removeFromCart(id){
-  cart = cart.filter(x => x.id !== id);
+function removeFromCart(cartId){
+  cart = cart.filter(x => x.cartId !== cartId);
   updateCartCount();
   renderCart();
 }
@@ -302,33 +348,28 @@ function orderCartForm(){
 function openForm(){
   $('form').style.display='block';
   if(orderMode === 'single'){
-    $('order-summary-box').innerHTML = `<b>Product:</b> ${cur.n}<br><b>Price:</b> ₹${cur.p}`;
+    let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
+    $('order-summary-box').innerHTML = `<b>Product:</b> ${titleStr}<br><b>Price:</b> ₹${selectedPrice}`;
   } else {
-    let summary = cart.map(i => {
-      let p = ps.find(x => x.id === i.id);
-      return `${p.n} (Qty: ${i.qty})`;
-    }).join('<br>');
-    let total = cart.reduce((sum, i) => sum + (ps.find(x=>x.id===i.id).p * i.qty), 0);
+    let summary = cart.map(i => `${i.name} (Qty: ${i.qty})`).join('<br>');
+    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
     $('order-summary-box').innerHTML = `<b>Items:</b><br>${summary}<br><b>Total Bill:</b> ₹${total}`;
   }
 }
 
 function closeF(){$('form').style.display='none'}
 
-/* Place Order on WhatsApp */
 function placeOrder(){
   let vals=['cn','ph','house','area','pin','city','state'].map(x=>$(x).value.trim());
   if(vals.some(x=>!x)){alert('Please fill all required details');return}
   
   let orderText = "";
   if(orderMode === 'single'){
-    orderText = `Product: ${cur.n}\nPrice: ₹${cur.p}`;
+    let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
+    orderText = `Product: ${titleStr}\nPrice: ₹${selectedPrice}`;
   } else {
-    let itemsText = cart.map(i => {
-      let p = ps.find(x => x.id === i.id);
-      return `- ${p.n} x${i.qty} (₹${p.p * i.qty})`;
-    }).join('\n');
-    let total = cart.reduce((sum, i) => sum + (ps.find(x=>x.id===i.id).p * i.qty), 0);
+    let itemsText = cart.map(i => `- ${i.name} x${i.qty} (₹${i.price * i.qty})`).join('\n');
+    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
     orderText = `CART ORDER:\n${itemsText}\nTotal Amount: ₹${total}`;
   }
 
@@ -342,7 +383,6 @@ function placeOrder(){
   location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
 }
 
-/* Support Functions */
 function openSupport(){$('supportModal').style.display = 'block'}
 function closeSupport(){$('supportModal').style.display = 'none'}
 function contactSupportWhatsApp(){
