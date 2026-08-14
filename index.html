@@ -10,14 +10,6 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 .wish-badge{background:#d81b60;color:#fff;border-radius:50%;padding:2px 7px;font-size:12px}
 .search{width:100%;box-sizing:border-box;padding:10px 12px;margin-top:10px;border:1px solid #ddd;border-radius:10px}
 
-/* Category Slider UI */
-.categories-bar{display:flex;gap:8px;padding:10px 15px;overflow-x:auto;background:#fff;border-bottom:1px solid #eee;white-space:nowrap;-webkit-overflow-scrolling:touch}
-.categories-bar::-webkit-scrollbar{display:none}
-.cat-btn{border:1px solid #ddd;background:#f8f9fa;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:bold;color:#555;cursor:pointer;transition:0.2s;display:inline-flex;align-items:center;gap:6px}
-.cat-btn.active{background:#d81b60;color:#fff;border-color:#d81b60}
-.cat-count{background:#eee;color:#333;border-radius:12px;padding:2px 6px;font-size:11px;font-weight:bold}
-.cat-btn.active .cat-count{background:#fff;color:#d81b60}
-
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:#ddd}
 .card{background:#fff;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
 .card img{width:100%;aspect-ratio:1;object-fit:contain}
@@ -70,9 +62,6 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 
   <input id="q" class="search" placeholder="🔍 Search products..." oninput="render()">
 </div>
-
-<!-- Categories Filter Bar -->
-<div id="cat-bar" class="categories-bar"></div>
 
 <div id="grid" class="grid"></div>
 
@@ -160,13 +149,9 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 </div>
 
 <script>
-let categories = ["All", "Clothing", "Fitness", "Home & Decor", "Accessories", "Toys"];
-let activeCategory = "All";
-
 let ps=[
   {
     id:1,
-    cat: "Home & Decor",
     n:"Smart glowing panda",
     p:300,
     m:500,
@@ -177,7 +162,6 @@ let ps=[
   },
   {
     id:2,
-    cat: "Home & Decor",
     n:"Premanand ji maharaj wall hanging",
     p:130,
     m:200,
@@ -188,7 +172,6 @@ let ps=[
   },
   {
     id:3,
-    cat: "Accessories",
     n:"Mahadev Rudraksha Trishul Necklace",
     p:150,
     m:300,
@@ -199,7 +182,6 @@ let ps=[
   },
   {
     id:4,
-    cat: "Accessories",
     n:"Anime Character Keychain – Cute Collectible Keyring",
     p:450,
     m:799,
@@ -210,7 +192,6 @@ let ps=[
   },
   {
     id:5,
-    cat: "Clothing",
     n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
     p:385,
     m:799,
@@ -231,7 +212,6 @@ let ps=[
   },
   {
     id:6,
-    cat: "Fitness",
     n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
     p:299,
     m:599,
@@ -253,23 +233,6 @@ let cur = null;
 let selectedSize = null;
 let selectedPrice = null;
 let orderMode = 'single';
-
-function renderCategories(){
-  $('cat-bar').innerHTML = categories.map(c => {
-    let count = (c === "All") ? ps.length : ps.filter(x => x.cat === c).length;
-    return `
-      <button class="cat-btn ${activeCategory === c ? 'active' : ''}" onclick="filterCategory('${c}')">
-        ${c} <span class="cat-count">${count}</span>
-      </button>
-    `;
-  }).join('');
-}
-
-function filterCategory(catName){
-  activeCategory = catName;
-  renderCategories();
-  render();
-}
 
 function updateCartCount(){
   let total = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -324,11 +287,7 @@ function renderWishlist(){
 
 function render(){
   let q=$('q').value.toLowerCase();
-  let a=ps.filter(x=>{
-    let matchesSearch = (x.n+' '+(x.d||'')).toLowerCase().includes(q);
-    let matchesCategory = (activeCategory === "All") || (x.cat === activeCategory);
-    return matchesSearch && matchesCategory;
-  });
+  let a=ps.filter(x=>(x.n+' '+(x.d||'')).toLowerCase().includes(q));
 
   $('grid').innerHTML=a.length?a.map(x=>{
     let isFav = wishlist.includes(x.id);
@@ -348,7 +307,7 @@ function render(){
         <button class="btn-buy" onclick="openD(${x.id})">Buy</button>
       </div>
     </div>
-  `}).join(''):'<div class="empty">No products found in this category</div>';
+  `}).join(''):'<div class="empty">No products found</div>';
   updateCartCount();
   updateWishCount();
 }
@@ -495,4 +454,32 @@ function placeOrder(){
   let orderText = "";
   if(orderMode === 'single'){
     let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
-    orderText = `Product: ${titleStr}\nPrice: ₹${
+    orderText = `Product: ${titleStr}\nPrice: ₹${selectedPrice}`;
+  } else {
+    let itemsText = cart.map(i => `- ${i.name} x${i.qty} (₹${i.price * i.qty})`).join('\n');
+    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    orderText = `CART ORDER:\n${itemsText}\nTotal Amount: ₹${total}`;
+  }
+
+  let msg=`NEW ORDER - SmartDeal Store\n\n${orderText}\n\nCustomer Details:\nName: ${vals[0]}\nMobile: ${vals[1]}\nAddress: ${vals[2]}, ${vals[3]}, ${vals[5]}, ${vals[6]} - ${vals[4]}\nPayment: Cash on Delivery`;
+  
+  if(orderMode === 'cart'){
+    cart = [];
+    updateCartCount();
+  }
+  
+  location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
+}
+
+function openSupport(){$('supportModal').style.display = 'block'}
+function closeSupport(){$('supportModal').style.display = 'none'}
+function contactSupportWhatsApp(){
+  let helpMsg = "Hello SmartDeal Store Support Team, I need help regarding my order / product inquiry.";
+  location.href='https://wa.me/9779703618936?text='+encodeURIComponent(helpMsg);
+}
+
+function $(x){return document.getElementById(x)}
+
+render();
+</script>
+</body></html>
