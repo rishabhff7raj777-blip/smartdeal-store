@@ -3,18 +3,31 @@
 body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70px}
 .top{position:sticky;top:0;background:#fff;padding:12px 15px;box-shadow:0 2px 8px rgba(0,0,0,0.08);z-index:3;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .brand{font-size:22px;font-weight:900}.brand span{color:#d81b60}
-.cart-icon-btn{background:#d81b60;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;gap:6px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.cart-icon-btn{background:#d81b60;color:#fff;border:none;padding:8px 12px;border-radius:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px}
+.wish-top-btn{background:#fff;color:#d81b60;border:1.5px solid #d81b60;padding:8px 12px;border-radius:20px;font-weight:bold;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px}
 .cart-badge{background:#fff;color:#d81b60;border-radius:50%;padding:2px 7px;font-size:12px}
+.wish-badge{background:#d81b60;color:#fff;border-radius:50%;padding:2px 7px;font-size:12px}
 .search{width:100%;box-sizing:border-box;padding:10px 12px;margin-top:10px;border:1px solid #ddd;border-radius:10px}
+
+/* Category Slider UI */
+.categories-bar{display:flex;gap:8px;padding:10px 15px;overflow-x:auto;background:#fff;border-bottom:1px solid #eee;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.categories-bar::-webkit-scrollbar{display:none}
+.cat-btn{border:1px solid #ddd;background:#f8f9fa;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:bold;color:#555;cursor:pointer;transition:0.2s;display:inline-flex;align-items:center;gap:6px}
+.cat-btn.active{background:#d81b60;color:#fff;border-color:#d81b60}
+.cat-count{background:#eee;color:#333;border-radius:12px;padding:2px 6px;font-size:11px;font-weight:bold}
+.cat-btn.active .cat-count{background:#fff;color:#d81b60}
+
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:#ddd}
 .card{background:#fff;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
 .card img{width:100%;aspect-ratio:1;object-fit:contain}
 .info{padding:10px}
 .price{font-size:18px;font-weight:900;margin-top:4px}
 .old{text-decoration:line-through;color:#999;font-size:13px}
-.card-btns{display:flex;gap:5px;padding:0 10px 10px 10px}
-.btn-add{flex:1;padding:8px;background:#f8bbd0;color:#880e4f;border:0;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px}
-.btn-buy{flex:1;padding:8px;background:#d81b60;color:#fff;border:0;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px}
+.card-btns{display:flex;gap:6px;padding:0 10px 10px 10px;align-items:center}
+.btn-heart{background:#f8f9fa;border:1px solid #ccc;padding:7px 12px;border-radius:6px;font-size:16px;cursor:pointer;transition:0.2s}
+.btn-heart.liked{background:#ffebee;border-color:#d81b60;color:#d81b60}
+.btn-buy{flex:1;padding:8px;background:#d81b60;color:#fff;border:0;border-radius:6px;font-weight:bold;cursor:pointer;font-size:12px;text-align:center}
 
 /* Detail & Modal */
 .modal{display:none;position:fixed;inset:0;background:#fff;z-index:100;overflow:auto}
@@ -47,11 +60,30 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 
 <div class="top">
   <div class="brand">Smart<span>Deal</span> Store</div>
-  <button class="cart-icon-btn" onclick="openCart()">🛒 Cart <span id="cart-count" class="cart-badge">0</span></button>
+  
+  <div class="top-actions">
+    <!-- Wishlist Button (Left of Cart) -->
+    <button class="wish-top-btn" onclick="openWish()">❤️ <span id="wish-count" class="wish-badge">0</span></button>
+    <!-- Cart Button -->
+    <button class="cart-icon-btn" onclick="openCart()">🛒 <span id="cart-count" class="cart-badge">0</span></button>
+  </div>
+
   <input id="q" class="search" placeholder="🔍 Search products..." oninput="render()">
 </div>
 
+<!-- Categories Filter Bar -->
+<div id="cat-bar" class="categories-bar"></div>
+
 <div id="grid" class="grid"></div>
+
+<!-- Saved / Wishlist Modal -->
+<div id="wishModal" class="modal">
+  <button class="back" onclick="closeWish()">← Back</button>
+  <div class="body">
+    <h2>Saved Products ❤️</h2>
+    <div id="wish-items"></div>
+  </div>
+</div>
 
 <!-- Product Detail Modal -->
 <div id="detail" class="modal">
@@ -128,9 +160,13 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 </div>
 
 <script>
+let categories = ["All", "Clothing", "Fitness", "Home & Decor", "Accessories", "Toys"];
+let activeCategory = "All";
+
 let ps=[
   {
     id:1,
+    cat: "Home & Decor",
     n:"Smart glowing panda",
     p:300,
     m:500,
@@ -141,6 +177,7 @@ let ps=[
   },
   {
     id:2,
+    cat: "Home & Decor",
     n:"Premanand ji maharaj wall hanging",
     p:130,
     m:200,
@@ -151,6 +188,7 @@ let ps=[
   },
   {
     id:3,
+    cat: "Accessories",
     n:"Mahadev Rudraksha Trishul Necklace",
     p:150,
     m:300,
@@ -161,6 +199,7 @@ let ps=[
   },
   {
     id:4,
+    cat: "Accessories",
     n:"Anime Character Keychain – Cute Collectible Keyring",
     p:450,
     m:799,
@@ -171,10 +210,11 @@ let ps=[
   },
   {
     id:5,
+    cat: "Clothing",
     n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
     p:385,
     m:799,
-    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set. Isme stylish V-neck Angrakha pattern, side dori tassels, aur matching printed dupatta milta hai.",
+    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.",
     f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
     delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
     im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
@@ -188,14 +228,48 @@ let ps=[
       {s:"4XL", p:535},
       {s:"5XL", p:535}
     ]
+  },
+  {
+    id:6,
+    cat: "Fitness",
+    n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
+    p:299,
+    m:599,
+    d:"Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!",
+    f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    im:[
+      "ms_ju2t5_512_343729039.jpg",
+      "ms_h5cid_512_343729041.jpg",
+      "ms_exyof_512_343729039.jpg",
+      "ms_9p77a_512_343729039.jpg"
+    ]
   }
 ];
 
 let cart = JSON.parse(localStorage.getItem('sm_cart') || '[]');
+let wishlist = JSON.parse(localStorage.getItem('sm_wish') || '[]');
 let cur = null;
 let selectedSize = null;
 let selectedPrice = null;
 let orderMode = 'single';
+
+function renderCategories(){
+  $('cat-bar').innerHTML = categories.map(c => {
+    let count = (c === "All") ? ps.length : ps.filter(x => x.cat === c).length;
+    return `
+      <button class="cat-btn ${activeCategory === c ? 'active' : ''}" onclick="filterCategory('${c}')">
+        ${c} <span class="cat-count">${count}</span>
+      </button>
+    `;
+  }).join('');
+}
+
+function filterCategory(catName){
+  activeCategory = catName;
+  renderCategories();
+  render();
+}
 
 function updateCartCount(){
   let total = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -203,10 +277,62 @@ function updateCartCount(){
   localStorage.setItem('sm_cart', JSON.stringify(cart));
 }
 
+function updateWishCount(){
+  $('wish-count').textContent = wishlist.length;
+  localStorage.setItem('sm_wish', JSON.stringify(wishlist));
+}
+
+function toggleWish(e, id){
+  if(e) e.stopPropagation();
+  let idx = wishlist.indexOf(id);
+  if(idx > -1){
+    wishlist.splice(idx, 1);
+  } else {
+    wishlist.push(id);
+  }
+  updateWishCount();
+  render();
+}
+
+function openWish(){
+  $('wishModal').style.display = 'block';
+  renderWishlist();
+}
+
+function closeWish(){ $('wishModal').style.display = 'none'; }
+
+function renderWishlist(){
+  if(wishlist.length === 0){
+    $('wish-items').innerHTML = '<div class="empty">No saved products yet! ❤️</div>';
+    return;
+  }
+  let savedItems = ps.filter(x => wishlist.includes(x.id));
+  $('wish-items').innerHTML = savedItems.map(x => `
+    <div class="cart-item">
+      <img src="${x.im[0]}" style="width:50px;height:50px;object-fit:contain;border-radius:6px">
+      <div style="flex:1;margin-left:10px">
+        <b>${x.n}</b><br>
+        <span style="color:#d81b60;font-weight:bold">₹${x.p}</span>
+      </div>
+      <div style="display:flex;gap:5px;align-items:center">
+        <button class="btn-buy" style="padding:6px 12px" onclick="closeWish();openD(${x.id})">View</button>
+        <button onclick="toggleWish(event, ${x.id});renderWishlist()" style="color:red;border:none;background:none;cursor:pointer;font-size:18px">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 function render(){
   let q=$('q').value.toLowerCase();
-  let a=ps.filter(x=>(x.n+' '+(x.d||'')).toLowerCase().includes(q));
-  $('grid').innerHTML=a.length?a.map(x=>`
+  let a=ps.filter(x=>{
+    let matchesSearch = (x.n+' '+(x.d||'')).toLowerCase().includes(q);
+    let matchesCategory = (activeCategory === "All") || (x.cat === activeCategory);
+    return matchesSearch && matchesCategory;
+  });
+
+  $('grid').innerHTML=a.length?a.map(x=>{
+    let isFav = wishlist.includes(x.id);
+    return `
     <div class="card">
       <div onclick="openD(${x.id})">
         <img src="${x.im[0]}">
@@ -216,12 +342,15 @@ function render(){
         </div>
       </div>
       <div class="card-btns">
-        <button class="btn-add" onclick="openD(${x.id})">+ Cart</button>
+        <button class="btn-heart ${isFav ? 'liked' : ''}" onclick="toggleWish(event, ${x.id})">
+          ${isFav ? '❤️' : '🤍'}
+        </button>
         <button class="btn-buy" onclick="openD(${x.id})">Buy</button>
       </div>
     </div>
-  `).join(''):'<div class="empty">No products found</div>';
+  `}).join(''):'<div class="empty">No products found in this category</div>';
   updateCartCount();
+  updateWishCount();
 }
 
 function openD(id){
@@ -366,31 +495,4 @@ function placeOrder(){
   let orderText = "";
   if(orderMode === 'single'){
     let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
-    orderText = `Product: ${titleStr}\nPrice: ₹${selectedPrice}`;
-  } else {
-    let itemsText = cart.map(i => `- ${i.name} x${i.qty} (₹${i.price * i.qty})`).join('\n');
-    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-    orderText = `CART ORDER:\n${itemsText}\nTotal Amount: ₹${total}`;
-  }
-
-  let msg=`NEW ORDER - SmartDeal Store\n\n${orderText}\n\nCustomer Details:\nName: ${vals[0]}\nMobile: ${vals[1]}\nAddress: ${vals[2]}, ${vals[3]}, ${vals[5]}, ${vals[6]} - ${vals[4]}\nPayment: Cash on Delivery`;
-  
-  if(orderMode === 'cart'){
-    cart = [];
-    updateCartCount();
-  }
-  
-  location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
-}
-
-function openSupport(){$('supportModal').style.display = 'block'}
-function closeSupport(){$('supportModal').style.display = 'none'}
-function contactSupportWhatsApp(){
-  let helpMsg = "Hello SmartDeal Store Support Team, I need help regarding my order / product inquiry.";
-  location.href='https://wa.me/9779703618936?text='+encodeURIComponent(helpMsg);
-}
-
-function $(x){return document.getElementById(x)}
-render();
-</script>
-</body></html>
+    orderText = `Product: ${titleStr}\nPrice: ₹${
