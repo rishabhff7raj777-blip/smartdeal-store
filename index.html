@@ -160,13 +160,95 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 function $(id){ return document.getElementById(id); }
 
 var ps = [
-  {id:1, n:"Smart glowing panda", p:300, m:500, d:"Panda Night Lamp rechargeable and soft.", f:"Soft material, Rechargeable", delv:"COD Available", im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]},
-  {id:2, n:"Premanand ji maharaj wall hanging", p:130, m:200, d:"Devotional Wall Hanging.", f:"Wooden", delv:"COD Available", im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]},
-  {id:3, n:"Mahadev Rudraksha Trishul Necklace", p:150, m:300, d:"Rudraksha Trishul & Om pendant.", f:"Trishul & Om design", delv:"COD Available", im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg"]},
-  {id:4, n:"Anime Character Keychain", p:450, m:799, d:"Collectible anime keyring.", f:"Anime design", delv:"COD Available", im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg"]},
-  {id:5, n:"Women Printed Cotton Angrakha Kurti Set", p:385, m:799, d:"Pink & White Anarkali Kurti Set.", f:"Cotton fabric", delv:"COD Available", im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg"], sizes:[{s:"S",p:385},{s:"M",p:458},{s:"L",p:527},{s:"XL",p:533},{s:"XXL",p:532}]},
-  {id:6, n:"Adjustable Hand Gripper (10kg - 60kg)", p:299, m:599, d:"Hand Gripper with Counter.", f:"Adjustable 10-60kg", delv:"COD Available", im:["ms_ju2t5_512_343729039.jpg","ms_h5cid_512_343729041.jpg"]},
-  {id:7, n:"Adjustable Hand Gripper Strength Trainer", p:199, m:399, d:"Heavy duty Hand Gripper.", f:"Rubber handle", delv:"COD Available", im:["ms_lalae_512_422646390.jpg","ms_71aeg_512_422646390.jpg"]}
+  {
+    id:1,
+    n:"Smart glowing panda",
+    p:300,
+    m:500,
+    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.",
+    f:"Soft material, Rechargeable",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
+  },
+  {
+    id:2,
+    n:"Premanand ji maharaj wall hanging",
+    p:130,
+    m:200,
+    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.",
+    f:"Wall Hanging Wooden",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]
+  },
+  {
+    id:3,
+    n:"Mahadev Rudraksha Trishul Necklace",
+    p:150,
+    m:300,
+    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
+    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
+    im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg","ms_qjfjr_512_554147024.jpg"]
+  },
+  {
+    id:4,
+    n:"Anime Character Keychain – Cute Collectible Keyring",
+    p:450,
+    m:799,
+    d:"Anime lovers ke liye stylish character keychain.",
+    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
+    im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg","ms_ryo3l_512_872176439.jpg"]
+  },
+  {
+    id:5,
+    n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
+    p:385,
+    m:799,
+    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.",
+    f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
+    sizes:[
+      {s:"S", p:385},
+      {s:"M", p:458},
+      {s:"L", p:527},
+      {s:"XL", p:533},
+      {s:"XXL", p:532},
+      {s:"XXXL", p:533},
+      {s:"4XL", p:535},
+      {s:"5XL", p:535}
+    ]
+  },
+  {
+    id:6,
+    n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
+    p:299,
+    m:599,
+    d:"Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!",
+    f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    im:[
+      "ms_ju2t5_512_343729039.jpg",
+      "ms_h5cid_512_343729041.jpg",
+      "ms_exyof_512_343729039.jpg",
+      "ms_9p77a_512_343729039.jpg"
+    ]
+  },
+  {
+    id:7,
+    n:"Adjustable Hand Gripper Strength Trainer (10kg - 60kg)",
+    p:199,
+    m:399,
+    d:"💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai.",
+    f:"⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
+    im:[
+      "ms_lalae_512_422646390.jpg",
+      "ms_71aeg_512_422646390.jpg",
+      "ms_wje2t_512_422646390.jpg"
+    ]
+  }
 ];
 
 var cart = [], wishlist = [];
@@ -315,4 +397,4 @@ function contactSupportWhatsApp(){ location.href='https://wa.me/9779703618936?te
 render();
 </script>
 </body>
-    </html>
+</html>
