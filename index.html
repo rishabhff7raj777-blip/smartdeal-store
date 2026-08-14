@@ -35,13 +35,13 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 .body{padding:15px}
 .buy-btn-full{width:100%;padding:14px;background:#d81b60;color:#fff;border:0;border-radius:9px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px}
 
-/* Size Options UI */
-.size-box{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 15px}
-.size-btn{border:1px solid #ccc;background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:center;font-size:13px;min-width:50px}
-.size-btn b{display:block;font-size:14px}
-.size-btn span{font-size:11px;color:#666}
-.size-btn.active{border:2px solid #d81b60;background:#fce4ec;color:#d81b60;font-weight:bold}
-.size-btn.active span{color:#d81b60}
+/* Options Selector UI */
+.option-box{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.opt-btn{border:1px solid #ccc;background:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:center;font-size:13px}
+.opt-btn b{display:block;font-size:13px}
+.opt-btn span{font-size:11px;color:#666}
+.opt-btn.active{border:2px solid #d81b60;background:#fce4ec;color:#d81b60;font-weight:bold}
+.opt-btn.active span{color:#d81b60}
 
 /* Support Float Button */
 .support-float{position:fixed;bottom:20px;left:20px;background:#25d366;color:#fff;width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:90;cursor:pointer;font-size:24px;border:none}
@@ -88,9 +88,16 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
     <h1 id="dn" style="font-size:20px;margin:5px 0"></h1>
     <div id="dp" class="price" style="color:#d81b60"></div>
     
-    <div id="size-container" style="display:none;margin-top:15px">
-      <h3 style="margin:0 0 5px">Select Size:</h3>
-      <div id="size-options" class="size-box"></div>
+    <!-- Flavor Selector -->
+    <div id="flavor-container" style="display:none;margin-top:12px">
+      <h4 style="margin:0 0 5px">Select Flavor: <span id="selected-flavor-txt" style="color:#d81b60"></span></h4>
+      <div id="flavor-options" class="option-box"></div>
+    </div>
+
+    <!-- Size/Quantity Selector -->
+    <div id="size-container" style="display:none;margin-top:12px">
+      <h4 style="margin:0 0 5px" id="size-label">Select Size:</h4>
+      <div id="size-options" class="option-box"></div>
     </div>
 
     <p id="dd" style="white-space:pre-line;color:#444"></p>
@@ -285,8 +292,8 @@ var ps = [
   {
     id:10,
     n:"Wellcore Micronised Creatine Monohydrate (122g)",
-    p:494,
-    m:799,
+    p:499,
+    m:899,
     d:"⚡ Ultimate fuel for muscle growth! Premium micronised creatine monohydrate for performance support and fast recovery.",
     f:"• Net Quantity (N): 1\n• Quantity: 122g (Below 250gm)\n• Shelf life (Best Before): 12 Months\n• Flavour: Mixed Fruit / Tropical Tango",
     delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
@@ -296,6 +303,29 @@ var ps = [
       "ms_drucz_512_466468647.jpg",
       "ms_uzl6f_512_466468647.jpg"
     ]
+  },
+  {
+    id:11,
+    n:"MuscleBlaze Micronised Creatine Monohydrate",
+    p:899,
+    m:1299,
+    d:"⚡ Boost your strength, endurance, and power output with MuscleBlaze Micronised Creatine Monohydrate. Super fine particles for fast absorption and rapid muscle hydration.",
+    f:"• Brand: MuscleBlaze (MB)\n• Pure Micronised Creatine Monohydrate\n• 100% Authentic & Tested\n• Fast Absorption Rate",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 3–7 working days",
+    im:[
+      "ms_anp4k_512_496490150.jpg",
+      "ms_dpzax_512_496490150.jpg",
+      "ms_70uoj_512_496490150.jpg"
+    ],
+    flavors: ["Citrus Blast", "Citrus Blast + Watermelon Kool Aid", "Juicy Berries", "Sunset Mango", "Unflavoured"],
+    sizes:[
+      {s:"100 g", p:494},
+      {s:"120 g", p:494},
+      {s:"250 g", p:899},
+      {s:"320 g", p:899},
+      {s:"400 g", p:1399},
+      {s:"500 g", p:1007}
+    ]
   }
 ];
 
@@ -303,7 +333,7 @@ var cart = [], wishlist = [];
 try { cart = JSON.parse(localStorage.getItem('sm_cart') || '[]'); } catch(e){}
 try { wishlist = JSON.parse(localStorage.getItem('sm_wish') || '[]'); } catch(e){}
 
-var cur = null, selectedSize = null, selectedPrice = null, orderMode = 'single';
+var cur = null, selectedSize = null, selectedFlavor = null, selectedPrice = null, orderMode = 'single';
 
 function updateCartCount(){
   var el = $('cart-count');
@@ -342,20 +372,44 @@ function openD(id){
   var th=''; for(var j=0;j<cur.im.length;j++){ th+='<img src="'+cur.im[j]+'" onclick="$(\'mi\').src=\''+cur.im[j]+'\'">'; }
   $('thumbs').innerHTML=th;
 
+  // Flavors setup
+  if(cur.flavors && cur.flavors.length){
+    $('flavor-container').style.display='block';
+    selectedFlavor = cur.flavors[0];
+    renderFlavors();
+  } else {
+    $('flavor-container').style.display='none';
+    selectedFlavor = null;
+  }
+
+  // Sizes / Quantities setup
   if(cur.sizes && cur.sizes.length){
     $('size-container').style.display='block';
+    $('size-label').textContent = cur.flavors ? "Select Quantity:" : "Select Size:";
     selectedSize=cur.sizes[0].s; selectedPrice=cur.sizes[0].p; renderSizes();
   } else {
     $('size-container').style.display='none'; selectedSize=null; selectedPrice=cur.p; $('dp').textContent='₹'+cur.p;
   }
 }
 
+function renderFlavors(){
+  $('selected-flavor-txt').textContent = selectedFlavor;
+  var flHtml='';
+  for(var i=0;i<cur.flavors.length;i++){
+    var fl = cur.flavors[i];
+    flHtml+='<div class="opt-btn '+(selectedFlavor===fl?'active':'')+'" onclick="selectFlavor(\''+fl+'\')"><b>'+fl+'</b></div>';
+  }
+  $('flavor-options').innerHTML=flHtml;
+}
+
+function selectFlavor(fl){ selectedFlavor=fl; renderFlavors(); }
+
 function renderSizes(){
   $('dp').textContent='₹'+selectedPrice;
   var szHtml='';
   for(var i=0;i<cur.sizes.length;i++){
     var sz=cur.sizes[i];
-    szHtml+='<div class="size-btn '+(selectedSize===sz.s?'active':'')+'" onclick="selectSize(\''+sz.s+'\','+sz.p+')"><b>'+sz.s+'</b><span>₹'+sz.p+'</span></div>';
+    szHtml+='<div class="opt-btn '+(selectedSize===sz.s?'active':'')+'" onclick="selectSize(\''+sz.s+'\','+sz.p+')"><b>'+sz.s+'</b><span>₹'+sz.p+'</span></div>';
   }
   $('size-options').innerHTML=szHtml;
 }
@@ -363,10 +417,14 @@ function renderSizes(){
 function selectSize(s,p){ selectedSize=s; selectedPrice=p; renderSizes(); }
 
 function addToCartCurrent(){
-  var cartId = cur.id + (selectedSize ? '-' + selectedSize : '');
+  var varName = cur.n;
+  if(selectedFlavor) varName += ' (' + selectedFlavor + ')';
+  if(selectedSize) varName += ' [' + selectedSize + ']';
+
+  var cartId = cur.id + '-' + (selectedFlavor||'') + '-' + (selectedSize||'');
   var f=false;
   for(var i=0;i<cart.length;i++){ if(cart[i].cartId===cartId){ cart[i].qty++; f=true; break; } }
-  if(!f){ cart.push({cartId:cartId, id:cur.id, name:cur.n+(selectedSize?' (Size: '+selectedSize+')':''), price:selectedPrice, qty:1}); }
+  if(!f){ cart.push({cartId:cartId, id:cur.id, name:varName, price:selectedPrice, qty:1}); }
   updateCartCount(); alert('Item added to Cart!');
 }
 
@@ -421,7 +479,10 @@ function orderCartForm(){ orderMode='cart'; closeCart(); openForm(); }
 function openForm(){
   $('form').style.display='block';
   if(orderMode==='single'){
-    $('order-summary-box').innerHTML='<b>Product:</b> '+(cur.n+(selectedSize?' (Size: '+selectedSize+')':''))+'<br><b>Price:</b> ₹'+selectedPrice;
+    var pName = cur.n;
+    if(selectedFlavor) pName += ' (' + selectedFlavor + ')';
+    if(selectedSize) pName += ' [' + selectedSize + ']';
+    $('order-summary-box').innerHTML='<b>Product:</b> '+pName+'<br><b>Price:</b> ₹'+selectedPrice;
   } else {
     var s='', t=0;
     for(var i=0;i<cart.length;i++){ s+='- '+cart[i].name+' x'+cart[i].qty+'<br>'; t+=(cart[i].price*cart[i].qty); }
@@ -433,7 +494,15 @@ function closeF(){ $('form').style.display='none'; }
 function placeOrder(){
   var f=['cn','ph','house','area','pin','city','state'], v=[];
   for(var i=0;i<f.length;i++){ var val=$(f[i]).value.trim(); if(!val){alert('Fill all fields');return;} v.push(val); }
-  var txt = (orderMode==='single') ? ("Product: "+cur.n+"\nPrice: ₹"+selectedPrice) : "CART ORDER";
+  var txt = '';
+  if(orderMode==='single'){
+    var pName = cur.n;
+    if(selectedFlavor) pName += ' (' + selectedFlavor + ')';
+    if(selectedSize) pName += ' [' + selectedSize + ']';
+    txt = "Product: "+pName+"\nPrice: ₹"+selectedPrice;
+  } else {
+    txt = "CART ORDER";
+  }
   var msg = "NEW ORDER\n\n"+txt+"\n\nDetails:\nName: "+v[0]+"\nMobile: "+v[1]+"\nAddress: "+v[2]+", "+v[3]+", "+v[5]+" - "+v[4];
   location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
 }
