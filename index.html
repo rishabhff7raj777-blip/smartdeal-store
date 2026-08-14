@@ -10,7 +10,7 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 .wish-badge{background:#d81b60;color:#fff;border-radius:50%;padding:2px 7px;font-size:12px}
 .search{width:100%;box-sizing:border-box;padding:10px 12px;margin-top:10px;border:1px solid #ddd;border-radius:10px}
 
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:#ddd}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:#ddd;min-height:200px}
 .card{background:#fff;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
 .card img{width:100%;aspect-ratio:1;object-fit:contain}
 .info{padding:10px}
@@ -44,7 +44,7 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 /* Forms & Cart */
 .form{display:none;position:fixed;inset:0;background:#f6f6f8;z-index:110;padding:15px;overflow:auto}
 .form input{width:100%;box-sizing:border-box;padding:12px;margin:6px 0 12px;border:1px solid #ccc;border-radius:9px}
-.empty{text-align:center;padding:60px;color:#777}
+.empty{text-align:center;padding:60px;color:#777;grid-column:span 2}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;background:#fff;margin-bottom:8px;border-radius:8px}
 .support-card{background:#e8f5e9;border-left:5px solid #2e7d32;padding:12px;margin-bottom:15px;border-radius:6px}
 .support-box{background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.05);margin-bottom:15px}
@@ -54,9 +54,7 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
   <div class="brand">Smart<span>Deal</span> Store</div>
   
   <div class="top-actions">
-    <!-- Wishlist Button (Left of Cart) -->
     <button class="wish-top-btn" onclick="openWish()">❤️ <span id="wish-count" class="wish-badge">0</span></button>
-    <!-- Cart Button -->
     <button class="cart-icon-btn" onclick="openCart()">🛒 <span id="cart-count" class="cart-badge">0</span></button>
   </div>
 
@@ -155,9 +153,9 @@ let ps=[
     n:"Smart glowing panda",
     p:300,
     m:500,
-    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.",
-    f:"Soft material, Rechargeable",
-    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    d:`🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.`,
+    f:`Soft material, Rechargeable`,
+    delv:`COD Available. Delivery 12 - 13 Days returnable`,
     im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
   },
   {
@@ -165,9 +163,9 @@ let ps=[
     n:"Premanand ji maharaj wall hanging",
     p:130,
     m:200,
-    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.",
-    f:"Wall Hanging Wooden",
-    delv:"COD Available. Delivery 12 - 13 Days returnable",
+    d:`🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.`,
+    f:`Wall Hanging Wooden`,
+    delv:`COD Available. Delivery 12 - 13 Days returnable`,
     im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]
   },
   {
@@ -175,9 +173,9 @@ let ps=[
     n:"Mahadev Rudraksha Trishul Necklace",
     p:150,
     m:300,
-    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
-    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
+    d:`Traditional design wala Rudraksha-style Trishul & Om pendant necklace.`,
+    f:`🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads`,
+    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available`,
     im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg","ms_qjfjr_512_554147024.jpg"]
   },
   {
@@ -185,9 +183,9 @@ let ps=[
     n:"Anime Character Keychain – Cute Collectible Keyring",
     p:450,
     m:799,
-    d:"Anime lovers ke liye stylish character keychain.",
-    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
+    d:`Anime lovers ke liye stylish character keychain.`,
+    f:`🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach`,
+    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available`,
     im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg","ms_ryo3l_512_872176439.jpg"]
   },
   {
@@ -195,9 +193,9 @@ let ps=[
     n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
     p:385,
     m:799,
-    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.",
-    f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    d:`Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.`,
+    f:`🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric`,
+    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
     im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
     sizes:[
       {s:"S", p:385},
@@ -215,9 +213,9 @@ let ps=[
     n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
     p:299,
     m:599,
-    d:"Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!",
-    f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    d:`Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!`,
+    f:`🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip`,
+    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
     im:[
       "ms_ju2t5_512_343729039.jpg",
       "ms_h5cid_512_343729041.jpg",
@@ -230,9 +228,9 @@ let ps=[
     n:"Adjustable Hand Gripper Strength Trainer (10kg - 60kg)",
     p:199,
     m:399,
-    d:"💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai. Beginners se lekar professionals tak sabhi ke liye perfect!",
-    f:"⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring\n🏋️ Unisex Design: Men aur Women dono ke liye suitable",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    d:`💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai. Beginners se lekar professionals tak sabhi ke liye perfect!`,
+    f:`⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring\n🏋️ Unisex Design: Men aur Women dono ke liye suitable`,
+    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
     im:[
       "ms_lalae_512_422646390.jpg",
       "ms_71aeg_512_422646390.jpg",
@@ -241,8 +239,23 @@ let ps=[
   }
 ];
 
-let cart = JSON.parse(localStorage.getItem('sm_cart') || '[]');
-let wishlist = JSON.parse(localStorage.getItem('sm_wish') || '[]');
+// Safe Storage Helper to Prevent Instagram Browser Crash
+function getStorage(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || '[]');
+  } catch(e) {
+    return [];
+  }
+}
+
+function setStorage(key, val) {
+  try {
+    localStorage.setItem(key, JSON.stringify(val));
+  } catch(e) {}
+}
+
+let cart = getStorage('sm_cart');
+let wishlist = getStorage('sm_wish');
 let cur = null;
 let selectedSize = null;
 let selectedPrice = null;
@@ -251,12 +264,12 @@ let orderMode = 'single';
 function updateCartCount(){
   let total = cart.reduce((sum, item) => sum + item.qty, 0);
   $('cart-count').textContent = total;
-  localStorage.setItem('sm_cart', JSON.stringify(cart));
+  setStorage('sm_cart', cart);
 }
 
 function updateWishCount(){
   $('wish-count').textContent = wishlist.length;
-  localStorage.setItem('sm_wish', JSON.stringify(wishlist));
+  setStorage('sm_wish', wishlist);
 }
 
 function toggleWish(e, id){
@@ -485,6 +498,3 @@ function placeOrder(){
   location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
 }
 
-function openSupport(){$('supportModal').style.display = 'block'}
-function closeSupport(){$('supportModal').style.display = 'none'}
-function contactSupport
