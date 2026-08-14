@@ -52,7 +52,6 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 .empty{text-align:center;padding:60px;color:#777;grid-column:span 2}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;background:#fff;margin-bottom:8px;border-radius:8px}
 .support-card{background:#e8f5e9;border-left:5px solid #2e7d32;padding:12px;margin-bottom:15px;border-radius:6px}
-.support-box{background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.05);margin-bottom:15px}
 </style>
 </head>
 <body>
@@ -68,17 +67,8 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
   <input id="q" class="search" placeholder="🔍 Search products..." oninput="render()">
 </div>
 
-<!-- Grid with Instant Fallback Products -->
-<div id="grid" class="grid">
-  <div class="card"><div onclick="openD(1)"><img src="1c608293556e329bf625c251cd1cb59f.jpg"><div class="info"><b>Smart glowing panda</b><div class="price">₹300 <span class="old">₹500</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 1)">🤍</button><button class="btn-buy" onclick="openD(1)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(2)"><img src="ey0zy_512.webp"><div class="info"><b>Premanand ji maharaj wall hanging</b><div class="price">₹130 <span class="old">₹200</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 2)">🤍</button><button class="btn-buy" onclick="openD(2)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(3)"><img src="ms_atlwn_512_554147024.jpg"><div class="info"><b>Mahadev Rudraksha Trishul Necklace</b><div class="price">₹150 <span class="old">₹300</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 3)">🤍</button><button class="btn-buy" onclick="openD(3)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(4)"><img src="ms_s3cit_512_872176439.jpg"><div class="info"><b>Anime Character Keychain</b><div class="price">₹450 <span class="old">₹799</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 4)">🤍</button><button class="btn-buy" onclick="openD(4)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(5)"><img src="ms_sdkfw_512_300850467.jpg"><div class="info"><b>Women Printed Kurti Set</b><div class="price">₹385 onwards <span class="old">₹799</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 5)">🤍</button><button class="btn-buy" onclick="openD(5)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(6)"><img src="ms_ju2t5_512_343729039.jpg"><div class="info"><b>Hand Gripper Digital Counter</b><div class="price">₹299 <span class="old">₹599</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 6)">🤍</button><button class="btn-buy" onclick="openD(6)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(7)"><img src="ms_lalae_512_422646390.jpg"><div class="info"><b>Hand Gripper Strength Trainer</b><div class="price">₹199 <span class="old">₹399</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 7)">🤍</button><button class="btn-buy" onclick="openD(7)">Buy</button></div></div>
-  <div class="card"><div onclick="openD(8)"><img src="ms_r7tu8_512_343122066.jpg"><div class="info"><b>Women Black Rayon A-Line Kurti</b><div class="price">₹290 <span class="old">₹599</span></div></div></div><div class="card-btns"><button class="btn-heart" onclick="toggleWish(event, 8)">🤍</button><button class="btn-buy" onclick="openD(8)">Buy</button></div></div>
-</div>
+<!-- Grid -->
+<div id="grid" class="grid"></div>
 
 <!-- Wishlist Modal -->
 <div id="wishModal" class="modal">
@@ -190,7 +180,7 @@ var ps = [
     d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
     f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
     delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
-    im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg","ms_qjfjr_512_554147024.jpg"]
+    im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg"]
   },
   {
     id:4,
@@ -231,7 +221,6 @@ var ps = [
     f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
     delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
     im:[
-      "ms_ju2t5_512_343729039.jpg",
       "ms_h5cid_512_343729041.jpg",
       "ms_exyof_512_343729039.jpg",
       "ms_9p77a_512_343729039.jpg"
@@ -271,6 +260,26 @@ var ps = [
       {s:"XL", p:290},
       {s:"XXL", p:290},
       {s:"XXXL", p:290}
+    ]
+  },
+  {
+    id:9,
+    n:"Men Printed Polyester Sando Tank Top (Pack of 2)",
+    p:250,
+    m:499,
+    d:"✨ Comfortable aur stylish printed vest/sando set for gym, sports, and casual wear.",
+    f:"• Fabric: Polyester\n• Net Quantity (N): 2\n• Color: Multicolor",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
+    im:[
+      "ms_64u73_512_709062794.jpg",
+      "ms_goblr_512_709062799.jpg",
+      "ms_udl6t_512_709062794.jpg"
+    ],
+    sizes:[
+      {s:"M", p:250},
+      {s:"L", p:250},
+      {s:"XL", p:250},
+      {s:"XXL", p:250}
     ]
   }
 ];
