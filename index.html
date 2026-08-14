@@ -147,15 +147,17 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
 </div>
 
 <script>
-let ps=[
+function $(id){ return document.getElementById(id); }
+
+var ps = [
   {
     id:1,
     n:"Smart glowing panda",
     p:300,
     m:500,
-    d:`🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.`,
-    f:`Soft material, Rechargeable`,
-    delv:`COD Available. Delivery 12 - 13 Days returnable`,
+    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.",
+    f:"Soft material, Rechargeable",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
     im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
   },
   {
@@ -163,9 +165,9 @@ let ps=[
     n:"Premanand ji maharaj wall hanging",
     p:130,
     m:200,
-    d:`🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.`,
-    f:`Wall Hanging Wooden`,
-    delv:`COD Available. Delivery 12 - 13 Days returnable`,
+    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.",
+    f:"Wall Hanging Wooden",
+    delv:"COD Available. Delivery 12 - 13 Days returnable",
     im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]
   },
   {
@@ -173,9 +175,9 @@ let ps=[
     n:"Mahadev Rudraksha Trishul Necklace",
     p:150,
     m:300,
-    d:`Traditional design wala Rudraksha-style Trishul & Om pendant necklace.`,
-    f:`🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads`,
-    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available`,
+    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
+    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
     im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg","ms_qjfjr_512_554147024.jpg"]
   },
   {
@@ -183,9 +185,9 @@ let ps=[
     n:"Anime Character Keychain – Cute Collectible Keyring",
     p:450,
     m:799,
-    d:`Anime lovers ke liye stylish character keychain.`,
-    f:`🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach`,
-    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available`,
+    d:"Anime lovers ke liye stylish character keychain.",
+    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
     im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg","ms_ryo3l_512_872176439.jpg"]
   },
   {
@@ -193,9 +195,9 @@ let ps=[
     n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
     p:385,
     m:799,
-    d:`Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.`,
-    f:`🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric`,
-    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
+    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.",
+    f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
     im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
     sizes:[
       {s:"S", p:385},
@@ -213,9 +215,9 @@ let ps=[
     n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
     p:299,
     m:599,
-    d:`Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!`,
-    f:`🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip`,
-    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
+    d:"Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!",
+    f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
     im:[
       "ms_ju2t5_512_343729039.jpg",
       "ms_h5cid_512_343729041.jpg",
@@ -228,9 +230,9 @@ let ps=[
     n:"Adjustable Hand Gripper Strength Trainer (10kg - 60kg)",
     p:199,
     m:399,
-    d:`💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai. Beginners se lekar professionals tak sabhi ke liye perfect!`,
-    f:`⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring\n🏋️ Unisex Design: Men aur Women dono ke liye suitable`,
-    delv:`📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days`,
+    d:"💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai. Beginners se lekar professionals tak sabhi ke liye perfect!",
+    f:"⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring\n🏋️ Unisex Design: Men aur Women dono ke liye suitable",
+    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
     im:[
       "ms_lalae_512_422646390.jpg",
       "ms_71aeg_512_422646390.jpg",
@@ -239,47 +241,38 @@ let ps=[
   }
 ];
 
-// Safe Storage Helper to Prevent Instagram Browser Crash
-function getStorage(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key) || '[]');
-  } catch(e) {
-    return [];
-  }
-}
+var cart = [];
+var wishlist = [];
 
-function setStorage(key, val) {
-  try {
-    localStorage.setItem(key, JSON.stringify(val));
-  } catch(e) {}
-}
+try { cart = JSON.parse(localStorage.getItem('sm_cart') || '[]'); } catch(e){ cart = []; }
+try { wishlist = JSON.parse(localStorage.getItem('sm_wish') || '[]'); } catch(e){ wishlist = []; }
 
-let cart = getStorage('sm_cart');
-let wishlist = getStorage('sm_wish');
-let cur = null;
-let selectedSize = null;
-let selectedPrice = null;
-let orderMode = 'single';
+var cur = null;
+var selectedSize = null;
+var selectedPrice = null;
+var orderMode = 'single';
 
 function updateCartCount(){
-  let total = cart.reduce((sum, item) => sum + item.qty, 0);
-  $('cart-count').textContent = total;
-  setStorage('sm_cart', cart);
+  var el = $('cart-count');
+  if(el){
+    var total = 0;
+    for(var i=0; i<cart.length; i++){ total += cart[i].qty; }
+    el.textContent = total;
+  }
+  try { localStorage.setItem('sm_cart', JSON.stringify(cart)); } catch(e){}
 }
 
 function updateWishCount(){
-  $('wish-count').textContent = wishlist.length;
-  setStorage('sm_wish', wishlist);
+  var el = $('wish-count');
+  if(el){ el.textContent = wishlist.length; }
+  try { localStorage.setItem('sm_wish', JSON.stringify(wishlist)); } catch(e){}
 }
 
 function toggleWish(e, id){
-  if(e) e.stopPropagation();
-  let idx = wishlist.indexOf(id);
-  if(idx > -1){
-    wishlist.splice(idx, 1);
-  } else {
-    wishlist.push(id);
-  }
+  if(e && e.stopPropagation) e.stopPropagation();
+  var idx = wishlist.indexOf(id);
+  if(idx > -1){ wishlist.splice(idx, 1); }
+  else { wishlist.push(id); }
   updateWishCount();
   render();
 }
@@ -292,62 +285,90 @@ function openWish(){
 function closeWish(){ $('wishModal').style.display = 'none'; }
 
 function renderWishlist(){
+  var wContainer = $('wish-items');
+  if(!wContainer) return;
   if(wishlist.length === 0){
-    $('wish-items').innerHTML = '<div class="empty">No saved products yet! ❤️</div>';
+    wContainer.innerHTML = '<div class="empty">No saved products yet! ❤️</div>';
     return;
   }
-  let savedItems = ps.filter(x => wishlist.includes(x.id));
-  $('wish-items').innerHTML = savedItems.map(x => `
-    <div class="cart-item">
-      <img src="${x.im[0]}" style="width:50px;height:50px;object-fit:contain;border-radius:6px">
-      <div style="flex:1;margin-left:10px">
-        <b>${x.n}</b><br>
-        <span style="color:#d81b60;font-weight:bold">₹${x.p}</span>
-      </div>
-      <div style="display:flex;gap:5px;align-items:center">
-        <button class="btn-buy" style="padding:6px 12px" onclick="closeWish();openD(${x.id})">View</button>
-        <button onclick="toggleWish(event, ${x.id});renderWishlist()" style="color:red;border:none;background:none;cursor:pointer;font-size:18px">🗑️</button>
-      </div>
-    </div>
-  `).join('');
+  var html = '';
+  for(var i=0; i<ps.length; i++){
+    var x = ps[i];
+    if(wishlist.indexOf(x.id) !== -1){
+      html += '<div class="cart-item">' +
+        '<img src="' + x.im[0] + '" style="width:50px;height:50px;object-fit:contain;border-radius:6px">' +
+        '<div style="flex:1;margin-left:10px"><b>' + x.n + '</b><br><span style="color:#d81b60;font-weight:bold">₹' + x.p + '</span></div>' +
+        '<div style="display:flex;gap:5px;align-items:center">' +
+          '<button class="btn-buy" style="padding:6px 12px" onclick="closeWish();openD(' + x.id + ')">View</button>' +
+          '<button onclick="toggleWish(event, ' + x.id + ');renderWishlist()" style="color:red;border:none;background:none;cursor:pointer;font-size:18px">🗑️</button>' +
+        '</div>' +
+      '</div>';
+    }
+  }
+  wContainer.innerHTML = html;
 }
 
 function render(){
-  let q=$('q').value.toLowerCase();
-  let a=ps.filter(x=>(x.n+' '+(x.d||'')).toLowerCase().includes(q));
-
-  $('grid').innerHTML=a.length?a.map(x=>{
-    let isFav = wishlist.includes(x.id);
-    return `
-    <div class="card">
-      <div onclick="openD(${x.id})">
-        <img src="${x.im[0]}">
-        <div class="info">
-          <b>${x.n}</b>
-          <div class="price">₹${x.p} ${x.sizes?'onwards':''} ${x.m?`<span class="old">₹${x.m}</span>`:''}</div>
-        </div>
-      </div>
-      <div class="card-btns">
-        <button class="btn-heart ${isFav ? 'liked' : ''}" onclick="toggleWish(event, ${x.id})">
-          ${isFav ? '❤️' : '🤍'}
-        </button>
-        <button class="btn-buy" onclick="openD(${x.id})">Buy</button>
-      </div>
-    </div>
-  `}).join(''):'<div class="empty">No products found</div>';
+  var gridEl = $('grid');
+  if(!gridEl) return;
+  
+  var qInput = $('q');
+  var q = qInput ? qInput.value.toLowerCase().trim() : '';
+  
+  var html = '';
+  var count = 0;
+  
+  for(var i=0; i<ps.length; i++){
+    var x = ps[i];
+    var textToSearch = (x.n + ' ' + (x.d || '')).toLowerCase();
+    if(q === '' || textToSearch.indexOf(q) !== -1){
+      count++;
+      var isFav = wishlist.indexOf(x.id) !== -1;
+      var priceStr = '₹' + x.p + (x.sizes ? ' onwards' : '') + (x.m ? ' <span class="old">₹' + x.m + '</span>' : '');
+      
+      html += '<div class="card">' +
+        '<div onclick="openD(' + x.id + ')">' +
+          '<img src="' + x.im[0] + '">' +
+          '<div class="info">' +
+            '<b>' + x.n + '</b>' +
+            '<div class="price">' + priceStr + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card-btns">' +
+          '<button class="btn-heart ' + (isFav ? 'liked' : '') + '" onclick="toggleWish(event, ' + x.id + ')">' +
+            (isFav ? '❤️' : '🤍') +
+          '</button>' +
+          '<button class="btn-buy" onclick="openD(' + x.id + ')">Buy</button>' +
+        '</div>' +
+      '</div>';
+    }
+  }
+  
+  if(count === 0){
+    gridEl.innerHTML = '<div class="empty">No products found</div>';
+  } else {
+    gridEl.innerHTML = html;
+  }
+  
   updateCartCount();
   updateWishCount();
 }
 
 function openD(id){
-  cur=ps.find(x=>x.id===id);
+  for(var i=0; i<ps.length; i++){ if(ps[i].id === id){ cur = ps[i]; break; } }
+  if(!cur) return;
   $('detail').style.display='block';
-  $('dn').textContent=cur.n;
-  $('dd').textContent=cur.d||'';
-  $('df').textContent=cur.f||'';
-  $('dv').textContent=cur.delv||'';
-  $('mi').src=cur.im[0];
-  $('thumbs').innerHTML=cur.im.map(x=>`<img src="${x}" onclick="$('mi').src='${x}'">`).join('');
+  $('dn').textContent = cur.n;
+  $('dd').textContent = cur.d || '';
+  $('df').textContent = cur.f || '';
+  $('dv').textContent = cur.delv || '';
+  $('mi').src = cur.im[0];
+  
+  var thHtml = '';
+  for(var j=0; j<cur.im.length; j++){
+    thHtml += '<img src="' + cur.im[j] + '" onclick="$(\'mi\').src=\'' + cur.im[j] + '\'">';
+  }
+  $('thumbs').innerHTML = thHtml;
 
   if(cur.sizes && cur.sizes.length){
     $('size-container').style.display='block';
@@ -358,18 +379,21 @@ function openD(id){
     $('size-container').style.display='none';
     selectedSize = null;
     selectedPrice = cur.p;
-    $('dp').textContent='₹'+cur.p;
+    $('dp').textContent = '₹' + cur.p;
   }
 }
 
 function renderSizes(){
-  $('dp').textContent='₹'+selectedPrice;
-  $('size-options').innerHTML = cur.sizes.map(sz => `
-    <div class="size-btn ${selectedSize === sz.s ? 'active' : ''}" onclick="selectSize('${sz.s}', ${sz.p})">
-      <b>${sz.s}</b>
-      <span>₹${sz.p}</span>
-    </div>
-  `).join('');
+  $('dp').textContent = '₹' + selectedPrice;
+  var szHtml = '';
+  for(var i=0; i<cur.sizes.length; i++){
+    var sz = cur.sizes[i];
+    var activeClass = (selectedSize === sz.s) ? 'active' : '';
+    szHtml += '<div class="size-btn ' + activeClass + '" onclick="selectSize(\'' + sz.s + '\', ' + sz.p + ')">' +
+      '<b>' + sz.s + '</b><span>₹' + sz.p + '</span>' +
+    '</div>';
+  }
+  $('size-options').innerHTML = szHtml;
 }
 
 function selectSize(sizeName, sizePrice){
@@ -379,122 +403,89 @@ function selectSize(sizeName, sizePrice){
 }
 
 function addToCartCurrent(){
-  let cartId = cur.id + (selectedSize ? '-' + selectedSize : '');
-  let item = cart.find(x => x.cartId === cartId);
-  if(item){ item.qty++; }
-  else { 
+  var cartId = cur.id + (selectedSize ? '-' + selectedSize : '');
+  var found = false;
+  for(var i=0; i<cart.length; i++){
+    if(cart[i].cartId === cartId){
+      cart[i].qty++;
+      found = true;
+      break;
+    }
+  }
+  if(!found){
     cart.push({
       cartId: cartId,
       id: cur.id,
-      name: cur.n + (selectedSize ? ` (Size: ${selectedSize})` : ''),
+      name: cur.n + (selectedSize ? ' (Size: ' + selectedSize + ')' : ''),
       price: selectedPrice,
       qty: 1
-    }); 
+    });
   }
   updateCartCount();
   alert('Item added to Cart!');
 }
 
-function closeD(){$('detail').style.display='none'}
-
+function closeD(){ $('detail').style.display='none'; }
 function openCart(){ $('cartModal').style.display = 'block'; renderCart(); }
 function closeCart(){ $('cartModal').style.display = 'none'; }
 
 function renderCart(){
+  var cBox = $('cart-items');
+  if(!cBox) return;
   if(cart.length === 0){
-    $('cart-items').innerHTML = '<div class="empty">Your cart is empty!</div>';
+    cBox.innerHTML = '<div class="empty">Your cart is empty!</div>';
     $('cart-summary').innerHTML = '';
     $('cart-checkout-btn').style.display = 'none';
     return;
   }
-  let total = 0;
-  let html = cart.map(item => {
-    let itemTotal = item.price * item.qty;
+  var total = 0;
+  var html = '';
+  for(var i=0; i<cart.length; i++){
+    var item = cart[i];
+    var itemTotal = item.price * item.qty;
     total += itemTotal;
-    return `
-      <div class="cart-item">
-        <div>
-          <b>${item.name}</b><br>
-          <span style="color:#666">₹${item.price} x ${item.qty} = ₹${itemTotal}</span>
-        </div>
-        <div>
-          <button onclick="changeQty('${item.cartId}', -1)">-</button>
-          <span style="margin:0 5px">${item.qty}</span>
-          <button onclick="changeQty('${item.cartId}', 1)">+</button>
-          <button onclick="removeFromCart('${item.cartId}')" style="color:red;margin-left:8px;border:none;background:none;cursor:pointer">🗑️</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-  
-  $('cart-items').innerHTML = html;
-  $('cart-summary').innerHTML = `Total Amount: <span style="color:#d81b60">₹${total}</span>`;
+    html += '<div class="cart-item">' +
+      '<div><b>' + item.name + '</b><br><span style="color:#666">₹' + item.price + ' x ' + item.qty + ' = ₹' + itemTotal + '</span></div>' +
+      '<div>' +
+        '<button onclick="changeQty(\'' + item.cartId + '\', -1)">-</button>' +
+        '<span style="margin:0 5px">' + item.qty + '</span>' +
+        '<button onclick="changeQty(\'' + item.cartId + '\', 1)">+</button>' +
+        '<button onclick="removeFromCart(\'' + item.cartId + '\')" style="color:red;margin-left:8px;border:none;background:none;cursor:pointer">🗑️</button>' +
+      '</div>' +
+    '</div>';
+  }
+  cBox.innerHTML = html;
+  $('cart-summary').innerHTML = 'Total Amount: <span style="color:#d81b60">₹' + total + '</span>';
   $('cart-checkout-btn').style.display = 'block';
 }
 
 function changeQty(cartId, delta){
-  let item = cart.find(x => x.cartId === cartId);
-  if(item){
-    item.qty += delta;
-    if(item.qty <= 0){ removeFromCart(cartId); return; }
+  for(var i=0; i<cart.length; i++){
+    if(cart[i].cartId === cartId){
+      cart[i].qty += delta;
+      if(cart[i].qty <= 0){ removeFromCart(cartId); return; }
+      break;
+    }
   }
   updateCartCount();
   renderCart();
 }
 
 function removeFromCart(cartId){
-  cart = cart.filter(x => x.cartId !== cartId);
+  var newCart = [];
+  for(var i=0; i<cart.length; i++){
+    if(cart[i].cartId !== cartId) newCart.push(cart[i]);
+  }
+  cart = newCart;
   updateCartCount();
   renderCart();
 }
 
-function orderSingleForm(){
-  orderMode = 'single';
-  closeD();
-  openForm();
-}
-
-function orderCartForm(){
-  orderMode = 'cart';
-  closeCart();
-  openForm();
-}
+function orderSingleForm(){ orderMode = 'single'; closeD(); openForm(); }
+function orderCartForm(){ orderMode = 'cart'; closeCart(); openForm(); }
 
 function openForm(){
   $('form').style.display='block';
   if(orderMode === 'single'){
-    let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
-    $('order-summary-box').innerHTML = `<b>Product:</b> ${titleStr}<br><b>Price:</b> ₹${selectedPrice}`;
-  } else {
-    let summary = cart.map(i => `${i.name} (Qty: ${i.qty})`).join('<br>');
-    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-    $('order-summary-box').innerHTML = `<b>Items:</b><br>${summary}<br><b>Total Bill:</b> ₹${total}`;
-  }
-}
-
-function closeF(){$('form').style.display='none'}
-
-function placeOrder(){
-  let vals=['cn','ph','house','area','pin','city','state'].map(x=>$(x).value.trim());
-  if(vals.some(x=>!x)){alert('Please fill all required details');return}
-  
-  let orderText = "";
-  if(orderMode === 'single'){
-    let titleStr = cur.n + (selectedSize ? ` (Size: ${selectedSize})` : '');
-    orderText = `Product: ${titleStr}\nPrice: ₹${selectedPrice}`;
-  } else {
-    let itemsText = cart.map(i => `- ${i.name} x${i.qty} (₹${i.price * i.qty})`).join('\n');
-    let total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-    orderText = `CART ORDER:\n${itemsText}\nTotal Amount: ₹${total}`;
-  }
-
-  let msg=`NEW ORDER - SmartDeal Store\n\n${orderText}\n\nCustomer Details:\nName: ${vals[0]}\nMobile: ${vals[1]}\nAddress: ${vals[2]}, ${vals[3]}, ${vals[5]}, ${vals[6]} - ${vals[4]}\nPayment: Cash on Delivery`;
-  
-  if(orderMode === 'cart'){
-    cart = [];
-    updateCartCount();
-  }
-  
-  location.href='https://wa.me/9779703618936?text='+encodeURIComponent(msg);
-}
-
+    var titleStr = cur.n + (selectedSize ? ' (Size: ' + selectedSize + ')' : '');
+    $('order-summary-box').innerHTML = '<b>Product:</b> ' + titleStr + '<br><b>Price:</b> ₹' +
