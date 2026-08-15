@@ -155,328 +155,39 @@ body{font-family:Arial,sans-serif;margin:0;background:#f6f6f8;padding-bottom:70p
   </div>
 </div>
 
+<!-- Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 function $(id){ return document.getElementById(id); }
 
-var ps = [
-  {
-    id:1,
-    n:"Smart glowing panda",
-    p:300,
-    m:500,
-    d:"🐼✨ Make your room brighter and more adorable! This cute Panda Night Lamp is rechargeable, soft to touch, and changes colours with a simple tap.",
-    f:"Soft material, Rechargeable",
-    delv:"COD Available. Delivery 12 - 13 Days returnable",
-    im:["1c608293556e329bf625c251cd1cb59f.jpg","dff23ef47eb99b2093fc1c0a287672fc.jpg","2a7d33d38d8468013740b8102c82da79.jpg"]
-  },
-  {
-    id:2,
-    n:"Premanand ji maharaj wall hanging",
-    p:130,
-    m:200,
-    d:"🌸 Bring positivity and devotion into your home with this beautiful Premanand Ji Maharaj Wall Hanging.",
-    f:"Wall Hanging Wooden",
-    delv:"COD Available. Delivery 12 - 13 Days returnable",
-    im:["ey0zy_512.webp","71ojhAQkBYL.jpg"]
-  },
-  {
-    id:3,
-    n:"Mahadev Rudraksha Trishul Necklace",
-    p:150,
-    m:300,
-    d:"Traditional design wala Rudraksha-style Trishul & Om pendant necklace.",
-    f:"🔱 Trishul & Om design pendant\n📿 Rudraksha-style beads",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
-    im:["ms_atlwn_512_554147024.jpg","ms_7q0b7_512_554147024.jpg"]
-  },
-  {
-    id:4,
-    n:"Anime Character Keychain – Cute Collectible Keyring",
-    p:450,
-    m:799,
-    d:"Anime lovers ke liye stylish character keychain.",
-    f:"🎌 Anime-inspired character designs\n🔑 Keyring ke saath easy to attach",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
-    im:["ms_s3cit_512_872176439.jpg","ms_lnqdh_512_872176439.jpg","ms_ryo3l_512_872176439.jpg"]
-  },
-  {
-    id:5,
-    n:"Women Printed Cotton Angrakha Kurti Set with Dupatta",
-    p:385,
-    m:799,
-    d:"Elegant aur traditional look ke liye perfect Pink & White Printed Angrakha Anarkali Kurti Set.",
-    f:"🌸 Stylish Angrakha style V-neck design\n👗 Full flair Anarkali style fit\n✨ Matching printed dupatta included\n☁️ Soft & comfortable fabric",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:["ms_sdkfw_512_300850467.jpg","ms_10vwr_512_300850467.jpg","ms_an2zp_512_300850467.jpg"],
-    sizes:[
-      {s:"S", p:385},
-      {s:"M", p:458},
-      {s:"L", p:527},
-      {s:"XL", p:533},
-      {s:"XXL", p:532},
-      {s:"XXXL", p:533},
-      {s:"4XL", p:535},
-      {s:"5XL", p:535}
-    ]
-  },
-  {
-    id:6,
-    n:"Adjustable Hand Gripper with Digital Counter (10kg - 60kg)",
-    p:220,
-    m:300,
-    d:"Apni hand, wrist aur forearm strength ko badhane ke liye perfect Adjustable Hand Gripper!",
-    f:"🔢 Built-in counter to track your daily reps\n⚙️ Adjustable resistance from 10kg to 60kg\n💪 High-strength stainless steel heavy spring\n✋ Non-slip ergonomic rubber grip",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_h5cid_512_343729041.jpg",
-      "ms_exyof_512_343729039.jpg",
-      "ms_9p77a_512_343729039.jpg"
-    ]
-  },
-  {
-    id:7,
-    n:"Adjustable Hand Gripper Strength Trainer (10kg - 60kg)",
-    p:170,
-    m:200,
-    d:"💪 Apni hand, wrist aur forearm strength ko strong banane ke liye sabse best Hand Gripper! Non-slip rubberised handle ke saath aane wala ye gripper aapki daily workout routine ko aasan aur comfortable banata hai.",
-    f:"⚙️ Adjustable Resistance: 10kg se 60kg tak easily adjust karein\n✋ Rubberised Handles: Anti-slip aur comfortable grip\n🛠️ Durable Spring: Heavy-duty stainless steel spring",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available",
-    im:[
-      "ms_lalae_512_422646390.jpg",
-      "ms_71aeg_512_422646390.jpg",
-      "ms_wje2t_512_422646390.jpg"
-    ]
-  },
-  {
-    id:8,
-    n:"Women Black Rayon A-Line Kurti",
-    p:290,
-    m:599,
-    d:"✨ Stylish aur comfortable Black Rayon Kurti, daily wear aur casual outing ke liye perfect.",
-    f:"• Color: Black\n• Fabric: Rayon\n• Fit/ Shape: A-line\n• Length: Knee length",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_r7tu8_512_343122066.jpg",
-      "ms_rfv2a_512_343122066.jpg",
-      "ms_g75s9_512_343122066.jpg"
-    ],
-    sizes:[
-      {s:"S", p:290},
-      {s:"M", p:290},
-      {s:"L", p:290},
-      {s:"XL", p:290},
-      {s:"XXL", p:290},
-      {s:"XXXL", p:290}
-    ]
-  },
-  {
-    id:9,
-    n:"Men Printed Polyester Sando Tank Top (Pack of 2)",
-    p:250,
-    m:499,
-    d:"✨ Comfortable aur stylish printed vest/sando set for gym, sports, and casual wear.",
-    f:"• Fabric: Polyester\n• Net Quantity (N): 2\n• Color: Multicolor",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_64u73_512_709062794.jpg",
-      "ms_goblr_512_709062799.jpg",
-      "ms_udl6t_512_709062794.jpg"
-    ],
-    sizes:[
-      {s:"M", p:250},
-      {s:"L", p:250},
-      {s:"XL", p:250},
-      {s:"XXL", p:250}
-    ]
-  },
-  {
-    id:10,
-    n:"Wellcore Micronised Creatine Monohydrate (122g)",
-    p:499,
-    m:899,
-    d:"⚡ Ultimate fuel for muscle growth! Premium micronised creatine monohydrate for performance support and fast recovery.",
-    f:"• Net Quantity (N): 1\n• Quantity: 122g (Below 250gm)\n• Shelf life (Best Before): 12 Months\n• Flavour: Mixed Fruit / Tropical Tango",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_rcrbj_512_466468647.jpg",
-      "ms_fytsx_512_466468647.jpg",
-      "ms_drucz_512_466468647.jpg",
-      "ms_uzl6f_512_466468647.jpg"
-    ]
-  },
-  {
-    id:11,
-    n:"MuscleBlaze Micronised Creatine Monohydrate",
-    p:899,
-    m:1299,
-    d:"⚡ Boost your strength, endurance, and power output with MuscleBlaze Micronised Creatine Monohydrate. Super fine particles for fast absorption and rapid muscle hydration.",
-    f:"• Brand: MuscleBlaze (MB)\n• Pure Micronised Creatine Monohydrate\n• 100% Authentic & Tested\n• Fast Absorption Rate",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 3–7 working days",
-    im:[
-      "ms_anp4k_512_496490150.jpg",
-      "ms_dpzax_512_496490150.jpg",
-      "ms_70uoj_512_496490150.jpg"
-    ],
-    flavors: ["Citrus Blast", "Citrus Blast + Watermelon Kool Aid", "Juicy Berries", "Sunset Mango", "Unflavoured"],
-    sizes:[
-      {s:"100 g", p:494},
-      {s:"120 g", p:494},
-      {s:"250 g", p:899},
-      {s:"320 g", p:899},
-      {s:"400 g", p:1399},
-      {s:"500 g", p:1007}
-    ]
-  },
-  {
-    id:12,
-    n:"Virat Kohli Printed Keychain",
-    p:100,
-    m:199,
-    d:"🏏 King Kohli Printed Keychain for Cricket & Virat Kohli Fans! High-quality print, compact & lightweight design.",
-    f:"• Premium Quality Print\n• Stylish & Durable Design\n• Compact & Lightweight (6.35cm x 3.80cm)\n• Perfect Gift for Cricket Lovers",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_luoqc_512_575056352.jpg",
-      "ms_oa1su_512_575056352.jpg",
-      "ms_pj0u6_512_575056352.jpg"
-    ]
-  },
-  {
-    id:13,
-    n:"RCB Virat Kohli Keychains Set",
-    p:180,
-    m:299,
-    d:"🔴 Iconic Royal Challengers Bengaluru (RCB) Virat Kohli printed keychains! Perfect collectible for every King Kohli & RCB fan.",
-    f:"• High-Definition RCB Printed Graphics\n• Durable Metal Ring & Acrylic Finish\n• Lightweight & Compact Design\n• Ideal Gift for Cricket Enthusiasts",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_3kdd0_512_890500766.jpg",
-      "ms_htkg4_512_890500766.jpg",
-      "ms_reqvk_512_890500766.jpg"
-    ]
-  },
-  {
-    id:14,
-    n:"Tibetan Buddhist Prayer Flags with Julley Keychain Combo",
-    p:130,
-    m:250,
-    d:"✨ Traditional Tibetan Prayer Flags (Om Mani Padme Hum) along with a stylish 'Julley' Strap Keychain! Perfect for bike, car, home decoration, or travel enthusiasts.",
-    f:"• Vibrant Multicolor Prayer Flags with Sacred Mantras\n• High Quality Fabric Strap 'Julley' Keychain\n• Perfect Combo for Bike, Scooter & Car Decor\n• Ideal Gift for Trekkers & Travelers",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_vo5o1_512_495011491.jpg",
-      "ms_fb0dg_512_495011491.jpg",
-      "ms_fv6v3_512_495011491.jpg"
-    ]
-  },
-  {
-    id:15,
-    n:"Heavy Duty Adjustable Hand Gripper Trainer",
-    p:250,
-    m:399,
-    d:"💪 Build grip strength, forearm muscle, and finger power with this heavy-duty adjustable hand gripper. Features an ergonomic curved handle for a secure and comfortable grip.",
-    f:"⚙️ Heavy Duty Steel Spring\n✋ Ergonomic Curved Anti-Slip Handle\n🏋️ Excellent for Forearm & Finger Strength Training",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_q6vcx_512_479972729.jpg",
-      "ms_hpqvn_512_479972729.jpg",
-      "ms_6qzso_512_479972729.jpg"
-    ]
-  },
-  {
-    id:16,
-    n:"WAPPLER BT 235v3 Wireless Bluetooth Neckband",
-    p:290,
-    m:599,
-    d:"🎵 High-quality sound and long-lasting battery performance! Enjoy music and crystal-clear calls on the go with WAPPLER BT 235v3 Bluetooth Neckband.",
-    f:"• Brand: WAPPLER\n• Model: BT 235v3\n• Type: Neckband | Color: Black\n• Material: ABS Plastic | Water Resistant: Yes\n• Battery Charge Time: 1 Hour\n• Play Time: Above 20 Hours\n• Mic: Yes | Noise Cancelling: Yes\n• Bluetooth Version: 5.1 (10m Range)\n• Charging Type: Type C\n• Compatibility: All Smartphones\n• Warranty: 1 Year Seller Warranty",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_1hau4_512_484775921.jpg",
-      "ms_yphtb_512_484775921.jpg",
-      "ms_1hau4_512_484775921.jpg",
-      "ms_8baet_512_484775921.jpg"
-    ]
-  },
-  {
-    id:17,
-    n:"YEWON YN001 Wireless Bluetooth Neckband",
-    p:280,
-    m:499,
-    d:"🎵 Premium wireless experience with long battery backup and high-fidelity sound output! (Note: Available color Blue or Black mix will be delivered as per stock).",
-    f:"• Brand: YEWON\n• Model Name: YN001\n• Type: In The Ear Neckband\n• Color: Multi (Blue/Black)\n• Material: ABS Plastic\n• Water Resistant: No\n• Battery Charge Time: 1 Hour\n• Play Time: Above 20 Hours\n• Mic: Yes | Noise Cancelling: Yes\n• Bluetooth Version: 5.2 (30m Range)\n• Charging Type: Type C | Frequency: 85 Hz\n• Compatibility: All Smartphones\n• Warranty: 12 Months On Site Warranty",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_djyfx_512_930083006.jpg",
-      "ms_13dsm_512_930083006.jpg",
-      "ms_94abx_512_930083006.jpg"
-    ]
-  },
-  {
-    id:18,
-    n:"TORTOBBIT PRO-1 True Wireless Earbuds (TWS)",
-    p:290,
-    m:599,
-    d:"🎵 Premium wireless sound experience with compact design and fast charging! Crystal-clear audio quality for music and calls on the go.",
-    f:"• Brand: TORTOBBIT\n• Model Name: PRO-1\n• Type: TWS | Color: White\n• Material: ABS Plastic | Water Resistant: Yes\n• Battery Charge Time: 1 Hour\n• Play Time: 3 Hours\n• Mic: Yes | Noise Cancelling: Yes\n• Bluetooth Version: 5.2 (10m Range)\n• Charging Type: IOS\n• Frequency: 25 Hz\n• Compatibility: All Smartphones\n• Warranty: 1 Month Carry In Warranty",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_pbb8i_512_465402153.jpg",
-      "ms_w84nu_512_465402153.jpg",
-      "ms_nby6x_512_465402153.jpg"
-    ]
-  },
-  {
-    id:19,
-    n:"Aluminum Alloy Bike Mobile Holder - C1",
-    p:230,
-    m:399,
-    d:"🚲 Strong & durable Aluminum Alloy Body Mobile Holder for bikes! Features extendable two arms (extends up to 10cm) with non-slip gasket cushions to catch and protect your phone firmly without scratching.",
-    f:"• Type: Bike | Color: Black\n• Mount Type: Others\n• Net Quantity (N): 1\n• Brand: Others | Model Name: C1\n• Generic Name: Mobile Holder\n• Product Dimensions (L x W x H): 0.5cm x 0.5cm x 0.5cm\n• Country of Origin: India\n• Feature: Aluminum Alloy Body, Firm Catch Screw Mechanism & Non-Slip Gaskets",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_208nw_512_239750427.jpg",
-      "ms_cpphg_512_239750427.jpg",
-      "ms_agsuv_512_239750427.jpg",
-      "ms_96upk_512_239750427.jpg"
-    ]
-  },
-  {
-    id:20,
-    n:"Motorcycle Bike Mobile Support Holder",
-    p:260,
-    m:499,
-    d:"🏍️ Secure and durable bike mobile support holder. Mounts easily on the handlebar base with a strong screw lock mechanism to ensure safe navigation while riding.",
-    f:"• Material: ABS Plastic\n• Color: Black\n• Net Quantity: 1\n• Mounted On: Handlebar Base\n• Holder Type: Bike Mobile Support\n• Charger Present: No\n• Mounting Type: Screw Lock\n• Compatible With: Any Smartphone\n• Generic Name: Motorcycle Mobile Holders",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_6xpih_512_573578319.jpg",
-      "ms_do50k_512_573578319.jpg",
-      "ms_qwdij_512_573578319.jpg",
-      "ms_jtmxq_512_573578319.jpg"
-    ]
-  },
-  {
-    id:21,
-    n:"Wooden Money Saving Piggy Bank Box (₹1,000,000 Target Counter)",
-    p:130,
-    m:299,
-    d:"🪵 Wooden Money Saving Box / Piggy Bank with Target Tracker Counter! Premium brown finish wooden money box with printed cash deposit targets (Small Amounts Become Big Savings). Perfect habit-building tool for kids, adults, and families to save step-by-step up to ₹1,00,000 target.",
-    f:"• Material: Premium MDF Wooden Finish\n• Target Printing: Printed savings counter numbers on front\n• Dimensions: 20cm (W) x 15cm (H) x 7cm (D)\n• Motive Quote: 'Small Amounts Become Big Savings'\n• Slot: Top paper money & coin deposit slot\n• Best Suitable For: Kids money box, family savings tracker, home decor",
-    delv:"📦 Delivery available at selected locations\n💵 Cash on Delivery available\n🚚 Estimated delivery: 5–10 working days",
-    im:[
-      "ms_eimvv_512_598072950.jpg",
-      "ms_cdjli_512_598072950.jpg",
-      "ms_y2gis_512_598072950.jpg",
-      "ms_rsi2f_512_598072950.jpg"
-    ]
-  }
-];
+// Supabase Connection Setup
+const SUPABASE_URL = 'https://qxringdbdxebqousnlmz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_N4GOiWc3mKq_QYHOP2uG-A_CtqVFu3A';
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+var ps = []; // Dynamic products array from Supabase
 var cart = [], wishlist = [];
 try { cart = JSON.parse(localStorage.getItem('sm_cart') || '[]'); } catch(e){}
 try { wishlist = JSON.parse(localStorage.getItem('sm_wish') || '[]'); } catch(e){}
 
 var cur = null, selectedSize = null, selectedFlavor = null, selectedPrice = null, orderMode = 'single';
+
+// Database se live data fetch karne ka function
+async function fetchProductsFromSupabase() {
+  $('grid').innerHTML = '<div class="empty">Loading products... ⏳</div>';
+  
+  const { data, error } = await _supabase.from('products').select('*');
+  
+  if (error) {
+    console.error('Error fetching products:', error);
+    $('grid').innerHTML = '<div class="empty">Error loading products!</div>';
+    return;
+  }
+  
+  ps = data || [];
+  render();
+}
 
 function updateCartCount(){
   var el = $('cart-count');
@@ -499,7 +210,8 @@ function render(){
     var x = ps[i];
     if(q==='' || (x.n+' '+(x.d||'')).toLowerCase().indexOf(q)!==-1){
       var isFav = wishlist.indexOf(x.id) !== -1;
-      html += '<div class="card"><div onclick="openD('+x.id+')"><img src="'+x.im[0]+'"><div class="info"><b>'+x.n+'</b><div class="price">₹'+x.p+(x.sizes?' onwards':'')+(x.m?' <span class="old">₹'+x.m+'</span>':'')+'</div></div></div><div class="card-btns"><button class="btn-heart '+(isFav?'liked':'')+'" onclick="toggleWish(event,'+x.id+')">'+(isFav?'❤️':'🤍')+'</button><button class="btn-buy" onclick="openD('+x.id+')">Buy</button></div></div>';
+      var firstImg = Array.isArray(x.im) ? x.im[0] : x.im;
+      html += '<div class="card"><div onclick="openD('+x.id+')"><img src="'+firstImg+'"><div class="info"><b>'+x.n+'</b><div class="price">₹'+x.p+(x.sizes?' onwards':'')+(x.m?' <span class="old">₹'+x.m+'</span>':'')+'</div></div></div><div class="card-btns"><button class="btn-heart '+(isFav?'liked':'')+'" onclick="toggleWish(event,'+x.id+')">'+(isFav?'❤️':'🤍')+'</button><button class="btn-buy" onclick="openD('+x.id+')">Buy</button></div></div>';
     }
   }
   gridEl.innerHTML = html || '<div class="empty">No products found</div>';
@@ -511,8 +223,10 @@ function openD(id){
   if(!cur) return;
   $('detail').style.display='block';
   $('dn').textContent=cur.n; $('dd').textContent=cur.d||''; $('df').textContent=cur.f||''; $('dv').textContent=cur.delv||'';
-  $('mi').src=cur.im[0];
-  var th=''; for(var j=0;j<cur.im.length;j++){ th+='<img src="'+cur.im[j]+'" onclick="$(\'mi\').src=\''+cur.im[j]+'\'">'; }
+  
+  var imArr = Array.isArray(cur.im) ? cur.im : [cur.im];
+  $('mi').src=imArr[0];
+  var th=''; for(var j=0;j<imArr.length;j++){ th+='<img src="'+imArr[j]+'" onclick="$(\'mi\').src=\''+imArr[j]+'\'">'; }
   $('thumbs').innerHTML=th;
 
   // Flavors setup
@@ -587,7 +301,8 @@ function renderWishlist(){
   var h='';
   for(var i=0;i<ps.length;i++){
     if(wishlist.indexOf(ps[i].id)!==-1){
-      h+='<div class="cart-item"><img src="'+ps[i].im[0]+'" style="width:50px;height:50px;object-fit:contain"><div style="flex:1;margin-left:10px"><b>'+ps[i].n+'</b><br>₹'+ps[i].p+'</div><button class="btn-buy" onclick="closeWish();openD('+ps[i].id+')">View</button></div>';
+      var firstImg = Array.isArray(ps[i].im) ? ps[i].im[0] : ps[i].im;
+      h+='<div class="cart-item"><img src="'+firstImg+'" style="width:50px;height:50px;object-fit:contain"><div style="flex:1;margin-left:10px"><b>'+ps[i].n+'</b><br>₹'+ps[i].p+'</div><button class="btn-buy" onclick="closeWish();openD('+ps[i].id+')">View</button></div>';
     }
   }
   w.innerHTML=h;
@@ -654,7 +369,8 @@ function openSupport(){ $('supportModal').style.display='block'; }
 function closeSupport(){ $('supportModal').style.display='none'; }
 function contactSupportWhatsApp(){ location.href='https://wa.me/9779703618936?text='+encodeURIComponent("Help needed"); }
 
-render();
+// Init page load
+document.addEventListener('DOMContentLoaded', fetchProductsFromSupabase);
 </script>
 </body>
 </html>
